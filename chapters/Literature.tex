@@ -13,11 +13,11 @@ Since the events are happening on a time line, time series decomposition was the
 The time series can then be split into different parts to support the corresponding pattern. There are three types of time series patterns. The first pattern is the trend. The trend is an decrease or increase over a long period of time. The second second is the season pattern. It is influenced by seasonal factors and has a known and fixed time period and. The third one is the cyclic pattern. Cyclic pattern influence usually has fluctuations of at least 2 years and the period is not fixed. The available data should be transformed to a time series and divided into suitable components, in case patterns are present.
 \subsection{Algorithms for Forecasting}\label{subsection:Algorithms for Forecasting}
 Now that the time series is investigated for patterns, it is time to forecast. The book and slides offer different algorithms to fulfill this task. Three algorithms are chosen to be presented more closely.
-\subsubsection{Moving Average}\label{section:Moving Average}
+\subsubsection{Moving Average}\label{subsubsection:Moving Average}
 A classical method is the moving average. It is used to calculate the next forecast value of a time series iteratively. For the time series it is done by taking all prior events in account for the next value. The calculated values are independent. The formula for the average at time t is: m(t)= 1/n E (n-1, 0) x(t-1)
-\subsubsection{Weighted Moving Average}\label{section:Weighted Moving Average}
+\subsubsection{Weighted Moving Average}\label{subsubsection:Weighted Moving Average}
 The window which is taken into the calculation of the next value can also be weighted. In contrast to the normal Moving Average, a window for the amount of values included in the creation of the average value. The window moves with the time series. When a calculating the next value, the first value is removed from the window. This way only a specific amount of values stays in the calculation.
-\subsection{Simple Exponential Smoothing}\label{section:Simple Exponential Smoothing}
+\subsubsection{Simple Exponential Smoothing}\label{subsubsection:Simple Exponential Smoothing}
 
 Cite papers with \verb+\cite{BibTeX key}+\\
 A comprehensive introduction to Operations Research: \cite{Winston.2007}
