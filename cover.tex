@@ -8,14 +8,14 @@
 \begin{center}
 \ifthenelse{\equal{\placedoctype}{Projektstudium}}{Projektstudium\\[1.5mm]}{}
 \ifthenelse{\equal{\placedoctype}{Seminararbeit}}{Seminararbeit\\[1.5mm]}{}
-\ifthenelse{\equal{\placedoctype}{Abschlussarbeit}}{Wissenschaftliche Arbeit zur Erlangung des Grades\\[1.5mm]\placediploma\\[1.5mm]}{}
-an der Technischen Universität München
+\ifthenelse{\equal{\placedoctype}{Abschlussarbeit}}{Scientific Paper for the \\[1.5mm]\placediploma\\[1.5mm]}{}
+at Technische Universit{\"a}t M{\"u}nchen
 \end{center}
 
 \vspace{1.5cm}
 
 \begin{center}
-\LARGE 
+\LARGE
 \textbf{\placetitle}
 \normalsize
 \end{center}
@@ -24,45 +24,20 @@ an der Technischen Universität München
 \vspace{1.5cm}
 
 \begin{tabular}{lp{0.5cm}l}
-Referent:&&\placelecturer\\
-&&\placeinstitute\\
-&&Technische Universität München\\
-&&\\
-&&\\
 Betreuer:&&\placesupervisor\\
+&&\placeinstitute\\
+&&Technische Universit{\"a}t M{\"u}nchen\\
 &&\\
 &&\\
 Studiengang:&&\placecourseofstudies\\
 &&\\
 &&\\
-Eingereicht von:&&\\
-&&\placefirstauthor\\
+Eingereicht von:&&\placefirstauthor\\
 &&\placefirstaddress\\
 &&Tel.: \placefirstphone\\
 &&Matrikelnummer: \placefirstmatrikelnumber\\
 &&\\
 &&\\
-\ifthenelse{\numofauthors > 1}{
-&&\placesecondauthor\\
-&&\placesecondaddress\\
-&&Tel.: \placesecondphone\\
-&&Matrikelnummer: \placesecondmatrikelnumber\\
-&&\\
-&&\\}{}
-\ifthenelse{\numofauthors > 2}{
-&&\placethirdauthor\\
-&&\placethirdaddress\\
-&&Tel.: \placethirdphone\\
-&&Matrikelnummer: \placethirdmatrikelnumber\\
-&&\\
-&&\\}{}
-\ifthenelse{\numofauthors > 3}{
-&&\placefourthauthor\\
-&&\placefourthaddress\\
-&&Tel.: \placethirdphone\\
-&&Matrikelnummer: \placethirdmatrikelnumber\\
-&&\\
-&&\\}{}
 Eingereicht am:&&\placedate\\
 \end{tabular}
 \restoregeometry
