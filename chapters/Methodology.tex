@@ -1,0 +1,25 @@
+\chapter{Methodology}\label{chapter:Methodology}
+\section{Section One}\label{section:Section One}
+\subsection{Subsection One}\label{labelname}
+
+Refer to symbols or abbreviations with\\\verb+\gls{symbolname} \glstext{symbolname} \glsfirst{symbolname}+:\\
+\gls{symb:N} \glstext{symb:N} \glsfirst{symb:N}\\
+\gls{BA} \gls{DA} \gls{MA}
+
+Refer to other sections with \verb+\ref{labelname}+:\\
+A reference to this subsection: \ref{labelname}
+
+Include figures with\\
+\verb+\begin{figure}+\\
+\verb+...+\\
+\verb+\caption{An example figure}\label{fig:example}\end{figure}+
+
+\begin{figure}[h]
+\begin{center}
+\includegraphics[width=10cm]{images/example_figure}
+\caption{An example figure}
+\label{fig:example}
+\end{center}
+\end{figure}
+
+Include only PostScript images (.eps) if you want to create a PostScript document using dvips and only .pdf, .png, .jpeg and .gif images if your goal is a PDF document using pdflatex.

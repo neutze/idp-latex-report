@@ -1,0 +1,24 @@
+\chapter{Results}\label{chapter:Results}
+Include tables with\\
+\verb+\begin{table}+\\
+\verb+\caption{An example table}\label{tab:example}+\\
+\verb+\begin{tabular}{ccc}+\\
+\verb+...+\\
+\verb+\end{tabular}\end{table}+
+
+\begin{table}[h]
+\centering
+\caption{An example table}\label{tab:example}
+\begin{tabular}{lccccc}
+\toprule
+Parameter&\multicolumn{5}{c}{Levels}\\
+\midrule
+$A$&1&2&3&4&\\
+$B$&1&2&3&4&\\
+$C$&1&2&3&4&5\\
+\midrule
+$D$&1&2&3&4&\\
+$E$&1&2&3&4&\\
+\bottomrule
+\end{tabular}
+\end{table}
