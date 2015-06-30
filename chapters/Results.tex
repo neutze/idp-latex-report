@@ -1,24 +1,188 @@
 \chapter{Results}\label{chapter:Results}
-Include tables with\\
-\verb+\begin{table}+\\
-\verb+\caption{An example table}\label{tab:example}+\\
-\verb+\begin{tabular}{ccc}+\\
-\verb+...+\\
-\verb+\end{tabular}\end{table}+
-
+Now that the models are run and the RMSE are collected it is time to evaluate the results of the different models. The results will be evaluated in two ways. The first is the RMSE of the training set. The lower the error is, the better the model fits the test. But using only this method is not a good indicator whether the model will fit future data. This is way in a second evaluation the difference between the error of the training set is compared to the test set. The test set, including the training data, is run through the algorithm the same way as the training set to calculate the error.
+The evaluation is done for the overall orders and a restaurant. Since yum2take was chosen to be the best example with the best data, the evaluation of the results is done on this restaurant.\newline
+For each model, the best results are presented in a table. Since there are many options for the weighted moving average and simple exponential smoothing, only the lowest error from the training set is displayed. This is done since when the forecast would be done, only the present result can be used and thus the lowest error would be chosen.
+\section{No time categorization}\label{section:No time categorization}
 \begin{table}[h]
 \centering
-\caption{An example table}\label{tab:example}
-\begin{tabular}{lccccc}
-\toprule
-Parameter&\multicolumn{5}{c}{Levels}\\
-\midrule
-$A$&1&2&3&4&\\
-$B$&1&2&3&4&\\
-$C$&1&2&3&4&5\\
-\midrule
-$D$&1&2&3&4&\\
-$E$&1&2&3&4&\\
-\bottomrule
+\caption{No time categorization results}
+\label{No time categorization results}
+\begin{tabular}{lllllll}
+\hline
+              & \multicolumn{3}{l}{yum2take}                                                                                                 & \multicolumn{3}{l}{all}                                                                                                        \\ \hline
+Algorithm     & \begin{tabular}[c]{@{}l@{}}training\\ \#686\end{tabular} & \begin{tabular}[c]{@{}l@{}}test\\ \#945\end{tabular} & difference & \begin{tabular}[c]{@{}l@{}}training\\ \#2129\end{tabular} & \begin{tabular}[c]{@{}l@{}}test\\ \#3196\end{tabular} & difference \\ \hline
+MA            & 6.02755                                                  & 5.950609                                             & -0.07694   & 8.409876                                                  & 8.565466                                              & 0.15559    \\ \hline
+MA (650/2125) & 5.738142                                                 & 5.880966                                             & 0.142823   & 4.542798                                                  & 8.976687                                              & 4.433889   \\ \hline
+SES (0.1/0.1) & 6.116109                                                 & 5.973192                                             & -0.14291   & \multicolumn{1}{l|}{8.560794}                             & \multicolumn{1}{l|}{8.65649}                          & 0.095695   \\ \hline
 \end{tabular}
 \end{table}
+\newline\textbf{All orders}\newline
+Using the different moving average algorithms on all orders results in an RMSE of 8 to 8.5 minutes. This results in a 16 to 17 minute window in which the food is finished. The results for the different simple exponential smoothing variations are even worse. They reach from 8.5 minutes to almost 12 minutes. This values cannot be used in a convenient way to forecast orders. This is way the forecasting should be done with restaurant specific data.
+\newline\newline\textbf{Only yum2take orders}\newline
+The results for the order based model are shown in figure[]. The RMSE’s of the difference between forecasted preparation time and the actual one for the different moving average variations are all pretty much the same. They are close to 6 minutes which results roughly in a 12 minute window for the driver to pick up the food just in time at the restaurant. The weighted moving average consists of different sizes for the weight. It is done in steps of 25 orders more. It is pretty stable at around 6 minutes when under 200 orders are taken into account of the calculation. Until a weight of around 600 orders the error is slightly higher, lowering for around three quarters of a minute when almost all orders are taken into account. This result may be caused by having only a few orders left when taking many for the forecasted value.
+
+
+The difference between test and training set is almost neglectable. It improves for almost all algorithms but the gain is only around 0.5 minutes which is not that drastic to the requirements of the forecast.
+\section{No time but slot categorization}\label{section:No time but slot categorization}
+\begin{table}[h]
+\centering
+\caption{No time but slot categorization results}
+\label{No time but slot categorization results}
+\begin{tabular}{lllllll}
+\hline
+             & \multicolumn{3}{l}{yum2take}                                                                                                 & \multicolumn{3}{l}{all}                                                                                                        \\ \hline
+Algorithm    & \begin{tabular}[c]{@{}l@{}}training\\ \#686\end{tabular} & \begin{tabular}[c]{@{}l@{}}test\\ \#945\end{tabular} & difference & \begin{tabular}[c]{@{}l@{}}training\\ \#2129\end{tabular} & \begin{tabular}[c]{@{}l@{}}test\\ \#3196\end{tabular} & difference \\ \hline
+MA           & 5.980634                                                 & 5.943105                                             & -0.03752   & 8.203962                                                  & 8.514927                                              & 0.310964   \\ \hline
+MA (25/100)  & 6.165134                                                 & 6.017991                                             & -0.14714   & 7.957781                                                  & 8.492864                                              & 0.535082   \\ \hline
+SES (0.1/0.1) & 6.065397                                                 & 5.982731                                             & -0.08266   & 8.379257                                                  & 8.618189                                              & 8.618189   \\ \hline
+\end{tabular}
+\end{table}
+\newline\newline\textbf{All orders}\newline
+[] rmse generated for the test and training set as well as the difference between them and the used algorithm on order basis
+The difference between test and training set is almost neglectable. It improves for almost all algorithms but the gain is only around 0.5 minutes which is not that drastic to the requirements of the forecast.
+\newline\newline\textbf{Only yum2take orders}\newline
+\section{Day categorization}\label{section:Day categorization}
+\begin{table}[h]
+\centering
+\caption{Day categorization results}
+\label{Day categorization results}
+\begin{tabular}{lllllll}
+\hline
+             & \multicolumn{3}{l}{yum2take}                                                                                                 & \multicolumn{3}{l}{all}                                                                                                        \\ \hline
+Algorithm    & \begin{tabular}[c]{@{}l@{}}training\\ \#686\end{tabular} & \begin{tabular}[c]{@{}l@{}}test\\ \#945\end{tabular} & difference & \begin{tabular}[c]{@{}l@{}}training\\ \#2129\end{tabular} & \begin{tabular}[c]{@{}l@{}}test\\ \#3196\end{tabular} & difference \\ \hline
+MA           & 6.011955                                                 & 5.993232                                             & -0.01872   & 8.403266                                                  & 8.57489                                               & 0.171623   \\ \hline
+SES (0.1/0.1) & 6.080652                                                 & 5.995665                                             & -0.08498   & 8.434747                                                  & 8.57399                                               & 0.139242           \\ \hline
+\end{tabular}
+\end{table}
+\newline\newline\textbf{All orders}\newline
+\newline\newline\textbf{Only yum2take orders}\newline
+\section{Day and slot categorization}\label{section:Day and slot categorization}
+\begin{table}[h]
+\centering
+\caption{Day and slot categorization}
+\label{Day and slot categorization results}
+\begin{tabular}{lllllll}
+\hline
+             & \multicolumn{3}{l}{yum2take}                                                                                                 & \multicolumn{3}{l}{all}                                                                                                        \\ \hline
+Algorithm    & \begin{tabular}[c]{@{}l@{}}training\\ \#686\end{tabular} & \begin{tabular}[c]{@{}l@{}}test\\ \#945\end{tabular} & difference & \begin{tabular}[c]{@{}l@{}}training\\ \#2129\end{tabular} & \begin{tabular}[c]{@{}l@{}}test\\ \#3196\end{tabular} & difference \\ \hline
+MA           & 6.011955                                                 & 5.993232                                             & -0.01872   & 8.162479                                                  & 8.535424                                              & 0.372944   \\ \hline
+MA (15/60)   & 6.127325                                                 & 6.109218                                             & -0.0181    & 7.859824                                                  & 8.737695                                              & 0.87787    \\ \hline
+SES (0.1/0.1) & 6.04016                                                  & 6.104262                                             & 0.064101   & 8.220405                                                  & 8.581225                                              & 0.360819   \\ \hline
+\end{tabular}
+\end{table}
+\newline\newline\textbf{All orders}\newline
+\newline\newline\textbf{Only yum2take orders}\newline
+\section{Week categorization}\label{section:Week categorization}
+\begin{table}[h]
+\centering
+\caption{Week categorization result}
+\label{Week categorization result}
+\begin{tabular}{lllllll}
+\hline
+              & \multicolumn{3}{l}{yum2take}                                                                                                 & \multicolumn{3}{l}{all}                                                                                                        \\ \hline
+Algorithm     & \begin{tabular}[c]{@{}l@{}}training\\ \#686\end{tabular} & \begin{tabular}[c]{@{}l@{}}test\\ \#945\end{tabular} & difference & \begin{tabular}[c]{@{}l@{}}training\\ \#2129\end{tabular} & \begin{tabular}[c]{@{}l@{}}test\\ \#3196\end{tabular} & difference \\ \hline
+MA            & 6.074067                                                 & 5.967819                                             & -0.10624   & 8.402317                                                  & 8.568181                                              & 0.165863   \\ \hline
+MA (8/16)     & 6.120197                                                 & 5.949482                                             & -0.17071   & 8.164492                                                  & 8.814434                                              &            \\ \hline
+SES (0.2/0.2) & 6.008943                                                 & 5.981932                                             & -0.02701   & 8.399327                                                  & 8.580201                                              & 0.180873   \\ \hline
+\end{tabular}
+\end{table}
+\newline\newline\textbf{All orders}\newline
+\newline\newline\textbf{Only yum2take orders}\newline
+\section{Week and slot categorization}\label{section:Week and slot categorization}
+\begin{table}[h]
+\centering
+\caption{Week and slot categorization results}
+\label{Week and slot categorization results}
+\begin{tabular}{lllllll}
+\hline
+              & \multicolumn{3}{l}{yum2take}                                                                                                 & \multicolumn{3}{l}{all}                                                                                                        \\ \hline
+Algorithm     & \begin{tabular}[c]{@{}l@{}}training\\ \#686\end{tabular} & \begin{tabular}[c]{@{}l@{}}test\\ \#945\end{tabular} & difference & \begin{tabular}[c]{@{}l@{}}training\\ \#2129\end{tabular} & \begin{tabular}[c]{@{}l@{}}test\\ \#3196\end{tabular} & difference \\ \hline
+MA            & 6.048462                                                 & 6.013698                                             & -0.03476   & 8.21474                                                   & 8.532601                                              & 0.31786    \\ \hline
+MA (8/12)     & 6.137753                                                 & 5.952349                                             & -0.1854    & 8.133761                                                  & 8.843515                                              & 0.709754   \\ \hline
+SES (0.3/0.3) & 5.935083                                                 & 6.155115                                             & 0.220032   & 8.18856                                                   & 8.615477                                              &            \\ \hline
+\end{tabular}
+\end{table}
+\newline\newline\textbf{All orders}\newline
+\newline\newline\textbf{Only yum2take orders}\newline
+\section{Weekday categorization}\label{section:Weekday categorization}
+\begin{table}[h]
+\centering
+\caption{Weekday categorization results}
+\label{Weekday categorization results}
+\begin{tabular}{lllllll}
+\hline
+              & \multicolumn{3}{l}{yum2take}                                                                                                 & \multicolumn{3}{l}{all}                                                                                                        \\ \hline
+Algorithm     & \begin{tabular}[c]{@{}l@{}}training\\ \#686\end{tabular} & \begin{tabular}[c]{@{}l@{}}test\\ \#945\end{tabular} & difference & \begin{tabular}[c]{@{}l@{}}training\\ \#2129\end{tabular} & \begin{tabular}[c]{@{}l@{}}test\\ \#3196\end{tabular} & difference \\ \hline
+MA            & 6.208329                                                 & 6.07587                                              & -0.13245   & 8.582432                                                  & 8.660576                                              & 0.078144   \\ \hline
+MA (8/12)     & 6.181677                                                 & 6.105938                                             & -0.07573   & 8.08649                                                   & 8.700854                                              & 0.614363   \\ \hline
+SES (0.2/0.3) & 6.23239                                                  & 6.113957                                             & -0.11843   & 8.573267                                                  & 8.683558                                              &            \\ \hline
+\end{tabular}
+\end{table}
+\newline\newline\textbf{All orders}\newline
+\newline\newline\textbf{Only yum2take orders}\newline
+\section{Weekday and slot categorization}\label{section:Weekday and slot categorization}
+\begin{table}[h]
+\centering
+\caption{Weekday and slot categorization results}
+\label{Weekday and slot categorization results}
+\begin{tabular}{lllllll}
+\hline
+              & \multicolumn{3}{l}{yum2take}                                                                                                 & \multicolumn{3}{l}{all}                                                                                                        \\ \hline
+Algorithm     & \begin{tabular}[c]{@{}l@{}}training\\ \#686\end{tabular} & \begin{tabular}[c]{@{}l@{}}test\\ \#945\end{tabular} & difference & \begin{tabular}[c]{@{}l@{}}training\\ \#2129\end{tabular} & \begin{tabular}[c]{@{}l@{}}test\\ \#3196\end{tabular} & difference \\ \hline
+MA            & 6.063212                                                 & 6.13718                                              & 0.073968   & 8.448001                                                  & 8.73583                                               & 0.287828   \\ \hline
+MA (12/12)    & 4.202483                                                 & 5.802201                                             & 1.599717   & 8.117922                                                  & 8.913511                                              & 0.795589   \\ \hline
+SES (0.3/0.2) & 6.319075                                                 & 6.163683                                             & -0.15539   & 8.378466                                                  & 8.720113                                              &            \\ \hline
+\end{tabular}
+\end{table}
+\newline\newline\textbf{All orders}\newline
+\newline\newline\textbf{Only yum2take orders}\newline
+\section{Single slot categorization}\label{section:Single slot categorization}
+\begin{table}[h]
+\centering
+\caption{Single slot categorization results}
+\label{Single slot categorization results}
+\begin{tabular}{lllllll}
+\hline
+              & \multicolumn{3}{l}{yum2take}                                                                                                 & \multicolumn{3}{l}{all}                                                                                                        \\ \hline
+Algorithm     & \begin{tabular}[c]{@{}l@{}}training\\ \#686\end{tabular} & \begin{tabular}[c]{@{}l@{}}test\\ \#945\end{tabular} & difference & \begin{tabular}[c]{@{}l@{}}training\\ \#2129\end{tabular} & \begin{tabular}[c]{@{}l@{}}test\\ \#3196\end{tabular} & difference \\ \hline
+MA            & 6.206459                                                 & 6.078068                                             & -0.12839   & 8.122773                                                  & 8.408003                                              & 0.28523    \\ \hline
+SES (0.1/0.2) & 6.347103                                                 & 6.149942                                             & -0.19716   & 8.670448                                                  & 8.752016                                              &  0.081567          \\ \hline
+\end{tabular}
+\end{table}
+\newline\newline\textbf{All orders}\newline
+\newline\newline\textbf{Only yum2take orders}\newline
+\section{Combination of Categorizations}\label{section:Combination of Categorizations}
+\newline\newline\textbf{All orders}\newline
+\begin{table}[h]
+\centering
+\caption{Combination of Categorizations results for all orders}
+\label{Combination of Categorizations results for all orders}
+\begin{tabular}{llllllllll}
+\hline
+yum2take  & \multicolumn{3}{l}{Results}                 & \multicolumn{6}{l}{Weights}                                                                           \\ \hline
+Algorithm & training      & test          & difference  & \multicolumn{3}{l}{slot} & \multicolumn{3}{l}{all orders}                                             \\ \hline
+          & \#2129 orders & \#3196 orders &             & today & 7 days & 4 weeks & today & 7 days & \begin{tabular}[c]{@{}l@{}}weekday\\ 4 weeks\end{tabular} \\ \hline
+MA        & 8.947472944   & 9.009768419   & 0.062295475 & 20    & 10     & 15      & 25    & 30     & 0                                                         \\ \hline
+MA        & 8.947526044   & 9.009875609   & 0.062349565 & 20    & 5      & 20      & 25    & 30     & 0                                                         \\ \hline
+MA        & 8.947812087   & 9.00973973    & 0.061927643 & 20    & 15     & 10      & 25    & 30     & 0                                                         \\ \hline
+MA        & 8.947971379   & 9.010061298   & 0.062089919 & 20    & 0      & 25      & 25    & 30     & 0                                                         \\ \hline
+MA        & 8.948138981   & 9.009792703   & 0.061653722 & 20    & 10     & 15      & 25    & 25     & 5                                                         \\ \hline
+\end{tabular}
+\end{table}
+\newline\newline\textbf{Only yum2take orders}\newline
+\begin{sideways}[h]
+\centering
+\caption{Combination of Categorizations results for yum2take}
+\label{Combination of Categorizations results for yum2take}
+\begin{tabular}{llllllllll}
+\hline
+all orders  & \multicolumn{3}{l}{Results}                & \multicolumn{6}{l}{Weights}                                                                           \\ \hline
+Algorithm & training     & test         & difference   & \multicolumn{3}{l}{slot} & \multicolumn{3}{l}{all orders}                                             \\ \hline
+          & \#686 orders & \#945 orders &              & today & 7 days & 4 weeks & today & 7 days & \begin{tabular}[c]{@{}l@{}}weekday\\ 4 weeks\end{tabular} \\ \hline
+MA        & 6.265421304  & 6.118386791  & -0.147034513 & 25    & 20     & 15      & 15    & 0      & 25                                                        \\ \hline
+MA        & 6.265551527  & 6.118048866  & -0.147502661 & 25    & 20     & 15      & 15    & 5      & 20                                                        \\ \hline
+MA        & 6.265856228  & 6.117902793  & -0.147953435 & 25    & 15     & 20      & 15    & 0      & 25                                                        \\ \hline
+MA        & 6.265868384  & 6.117507337  & -0.148361047 & 25    & 15     & 20      & 15    & 5      & 20                                                        \\ \hline
+MA        & 6.265946422  & 6.117772134  & -0.148174288 & 25    & 20     & 15      & 15    & 10     & 15                                                        \\ \hline
+\end{tabular}
+\end{sideways}
