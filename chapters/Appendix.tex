@@ -3,14 +3,36 @@
 \renewcommand{\thesection}{\arabic{section}}
 \renewcommand{\theequation}{\arabic{equation}}
 \section{Appendix One: Consumer Application}\label{section:Appendix One: Consumer Application}
-To improve the delivery experience for the person ordering, a web view should be created showing details about the current delivery and an estimation about the delivery time. The various steps of the delivery are provided by our backend and should go in the direction of order accepted, driver on the way to you and so on. All this should be presented in a good overview and best be improved by a map showing the driver’s current location. After the delivery is finished an option to rate the delivery experience should show up.
 
-Another task for the Interdisciplinary Project was to create a consumer application. The aim of the application is to give the person who just ordered information about the delivery. This includes the current step in the delivery process as well as the current position of the driver on a map. After the process the customer should be able to rate the delivery.
+Another task for the Interdisciplinary Project was to create a consumer application. The aim of the application is to give the person who just ordered information about the delivery. This includes the current step in the delivery process as well as the current position of the driver on a map. After the process the customer should be able to rate the delivery.\newline
+The moment the customer finishes placing an order the backend should create an account for the customer. The credentials for the new user should be send to the customer by email. The email also directs to the application in the Play Store where it can be downloaded. This part has to be implemented in the backend if it should be used in a real scenario.\newline
+The user can login into the application (Fig. \ref{fig:consumer_application} left) by entering the user data. Right now a driver account is used to demonstrate the functionality since the backend does not support the right manage to let users see orders owned by drivers.\newline
+When the customer enters the application the screen in the middle of Figure \ref{fig:consumer_application} is shown. In this screen "assigning_to_driver" is shown as status. This means the driver cannot be tracked yet since the order has not been assigned to a driver.
 
 
+\begin{figure}[htp]
+
+\centering
+\includegraphics[width=.3\textwidth]{images/1_login.png}\hfill
+\includegraphics[width=.3\textwidth]{images/6_assign.png}\hfill
+\includegraphics[width=.3\textwidth]{images/2_pickup_started.png}
+\caption{The consumer application. Login on the left. Idle }
+\label{fig:consumer_application}
+
+\end{figure}
+
+\begin{figure}[htp]
+
+\centering
+\includegraphics[width=.3\textwidth]{images/3_pickup_ended.png}\hfill
+\includegraphics[width=.3\textwidth]{images/4_delivery_started.png}\hfill
+\includegraphics[width=.3\textwidth]{images/5_feedback.png}
+\caption{The graphical userinterface of the consumer application}
+\label{fig:consumer_application}
+
+\end{figure}
 
 \newpage
 \section{Appendix Two: Code and Results}\label{section:Appendix Two: Code and Results}
 
-Code repository on Bitbucket:\newline
-https://bitbucket.org/H1GHWAvE/volo-java-evaluation\&&\&&
+The code and application will be send by email since they contain confidential material of VOLO UG.
