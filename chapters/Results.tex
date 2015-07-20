@@ -1,12 +1,13 @@
 \chapter{Results}\label{chapter:Results}
-Now that the models are run and the RMSE are collected it is time to evaluate the results of the different models. The results will be evaluated in two ways. The first is the RMSE of the training set. The lower the error is, the better the model fits the test. But using only this method is not a good indicator whether the model will fit future data. This is way in a second evaluation the difference between the error of the training set is compared to the test set. The test set, including the training data, is run through the algorithm the same way as the training set to calculate the error.
-The evaluation is done for the overall orders and a restaurant. Since yum2take was chosen to be the best example with the best data, the evaluation of the results is done on this restaurant.\newline
-For each model, the best results are presented in a table. Since there are many options for the weighted moving average and simple exponential smoothing, only the lowest error from the training set is displayed. This is done since when the forecast would be done, only the present result can be used and thus the lowest error would be chosen.
+Now that the models are set and run, the RMSE are collected it is time to evaluate the results of the different models. The results will be evaluated in two ways. The first is the RMSE of the training set. The lower the error is, the better the model fits the test. But using only this method is not a good indicator whether the model will fit future data. This is why in a second evaluation the difference between the error of the training set is compared to the test set. The test set, including the training data, is run through the algorithm the same way as the training set to calculate the error.\newline
+The evaluation is done for all orders as well as for a restaurant. Since yum2take was chosen to be the best example with the best data, the evaluation of the results is done on this restaurant.\newline
+For each model, the best results are presented in a table. Since there are many options for the weighted moving average and simple exponential smoothing, only the lowest error and thus best result from the training set is displayed. This is done since when the forecast would be done, only the present result can be used and thus the lowest error would be chosen. The table contains the algorithm used in the most left column and two columns for each order set, for yum2take on the left and for all orders on the right. For each set there are the names of each set and the number of orders it contains as well as the difference between the error of the two sets.
 \section{No time categorization}\label{section:No time categorization}
+This forecast was done by using all previous orders for the current forecast. The results are shown in Tabular \ref{tab:No time categorization results}.
 \begin{table}[h]
 \centering
 \caption{No time categorization results}
-\label{No time categorization results}
+\label{tab:No time categorization results}
 \scalebox{0.5}{%
 \begin{tabular}{lllllll}
 \hline
@@ -14,21 +15,21 @@ For each model, the best results are presented in a table. Since there are many 
 Algorithm     & \begin{tabular}[c]{@{}l@{}}training\\ \#686\end{tabular} & \begin{tabular}[c]{@{}l@{}}test\\ \#945\end{tabular} & difference & \begin{tabular}[c]{@{}l@{}}training\\ \#2129\end{tabular} & \begin{tabular}[c]{@{}l@{}}test\\ \#3196\end{tabular} & difference \\ \hline
 MA            & 6.02755                                                  & 5.950609                                             & -0.07694   & 8.409876                                                  & 8.565466                                              & 0.15559    \\ \hline
 MA (650/2125) & 5.738142                                                 & 5.880966                                             & 0.142823   & 4.542798                                                  & 8.976687                                              & 4.433889   \\ \hline
-SES (0.1/0.1) & 6.116109                                                 & 5.973192                                             & -0.14291   & \multicolumn{1}{l|}{8.560794}                             & \multicolumn{1}{l|}{8.65649}                          & 0.095695   \\ \hline
+SES (0.1/0.1) & 6.116109                                                 & 5.973192                                             & -0.14291   & \multicolumn{1}{l}{8.560794}                             & \multicolumn{1}{l}{8.65649}                          & 0.095695   \\ \hline
 \end{tabular}}
 \end{table}
-\newline\textbf{All orders}
-Using the different moving average algorithms on all orders results in an RMSE of 8 to 8.5 minutes. This results in a 16 to 17 minute window in which the food is finished. The results for the different simple exponential smoothing variations are even worse. They reach from 8.5 minutes to almost 12 minutes. This values cannot be used in a convenient way to forecast orders. This is way the forecasting should be done with restaurant specific data.
+\newline\textbf{All orders}\newline
+The results when having no time categorization and using all orders are not very convenient. Most of the values are around 8 to 9 minutes which result in an arrival window of 16 to 18 minutes which is far worse than just being there after 15 minutes. For the weighted moving average it can be said that the more orders taken into account the result improves. This pretty normal since the average is getting closer to what it actually is the bigger the set of values for calculation gets. The only anomaly is an outlier result when using the weighted average which shows that using always the best result from the training data set is not the best choice. This categorization is not feasible for real life usage.\newline
+The difference between the two sets is almost always under one minute, except for the outlier, which makes it neglectable for the purpose of this forecast.
 \newline\newline\textbf{Only yum2take orders}\newline
-The results for the order based model are shown in figure[]. The RMSE’s of the difference between forecasted preparation time and the actual one for the different moving average variations are all pretty much the same. They are close to 6 minutes which results roughly in a 12 minute window for the driver to pick up the food just in time at the restaurant. The weighted moving average consists of different sizes for the weight. It is done in steps of 25 orders more. It is pretty stable at around 6 minutes when under 200 orders are taken into account of the calculation. Until a weight of around 600 orders the error is slightly higher, lowering for around three quarters of a minute when almost all orders are taken into account. This result may be caused by having only a few orders left when taking many for the forecasted value.
-
-
-The difference between test and training set is almost neglectable. It improves for almost all algorithms but the gain is only around 0.5 minutes which is not that drastic to the requirements of the forecast.
+The RMSE of the difference between forecasted preparation time and the actual one for the different moving average variations are all pretty much the same. They are close to 6 minutes which results roughly in a 12 minute window for the driver to pick up the food just in time at the restaurant. The weighted moving average consists of different sizes for the weight. It is done in steps of 25 orders more. It is pretty stable at around 6 minutes when under 200 orders are taken into account of the calculation. Until a weight of around 600 orders the error is slightly higher, lowering for around three quarters of a minute when almost all orders are taken into account. This result may be caused by having only a few orders left when taking many for the forecasted value.\newline
+The difference for yum2take\'s sets is also very low and constant and hence can be ignored.
 \section{No time but slot categorization}\label{section:No time but slot categorization}
+After separating the orders into their slots chronological, only previous orders from this slot were used for the forecast. The results are shown in Tabular \ref{tab:No time but slot categorization results}.
 \begin{table}[h]
 \centering
 \caption{No time but slot categorization results}
-\label{No time but slot categorization results}
+\label{tab:No time but slot categorization results}
 \scalebox{0.5}{%
 \begin{tabular}{lllllll}
 \hline
@@ -40,14 +41,14 @@ SES (0.1/0.1) & 6.065397                                                 & 5.982
 \end{tabular}}
 \end{table}
 \newline\newline\textbf{All orders}\newline
-[] rmse generated for the test and training set as well as the difference between them and the used algorithm on order basis
-The difference between test and training set is almost neglectable. It improves for almost all algorithms but the gain is only around 0.5 minutes which is not that drastic to the requirements of the forecast.
+The results for this model are around 8 minutes which is still too high but better than without the use of slots. The difference of RMSE for each set is again with around half a minute neglectable.
 \newline\newline\textbf{Only yum2take orders}\newline
 \section{Day categorization}\label{section:Day categorization}
+The results in Tabular \ref{tab:Day categorization} are generated for categorization by day where only previous orders of the current day are taken into account for the forecast of the next value.
 \begin{table}[h]
 \centering
 \caption{Day categorization results}
-\label{Day categorization results}
+\label{tab:Day categorization}
 \scalebox{0.5}{%
 \begin{tabular}{lllllll}
 \hline
@@ -58,12 +59,14 @@ SES (0.1/0.1) & 6.080652                                                 & 5.995
 \end{tabular}}
 \end{table}
 \newline\newline\textbf{All orders}\newline
+When forecasting on daily basis most results are about 8.5 minutes. This is not an improvement over the categorizations before, even though the error decreased.
 \newline\newline\textbf{Only yum2take orders}\newline
 \section{Day and slot categorization}\label{section:Day and slot categorization}
+For this the data set was split into the three slots for each day. The results are shown in Tabular \ref{tab:Day and slot categorization results}.
 \begin{table}[h]
 \centering
 \caption{Day and slot categorization}
-\label{Day and slot categorization results}
+\label{tab:Day and slot categorization results}
 \scalebox{0.5}{%
 \begin{tabular}{lllllll}
 \hline
@@ -75,12 +78,14 @@ SES (0.1/0.1) & 6.04016                                                  & 6.104
 \end{tabular}}
 \end{table}
 \newline\newline\textbf{All orders}\newline
+This categorization is an improvement over the one without slot categorization. This shows that going for a finer categorization can help to improve results. But since the results are still too high with 8 minutes and for the test set they even increase, this is not a usable categorization.
 \newline\newline\textbf{Only yum2take orders}\newline
 \section{Week categorization}\label{section:Week categorization}
+The results of categorization by weekday is shown in Tabular \ref{tab:Week categorization result}.
 \begin{table}[h]
 \centering
 \caption{Week categorization result}
-\label{Week categorization result}
+\label{tab:Week categorization result}
 \scalebox{0.5}{%
 \begin{tabular}{lllllll}
 \hline
@@ -92,12 +97,14 @@ SES (0.2/0.2) & 6.008943                                                 & 5.981
 \end{tabular}}
 \end{table}
 \newline\newline\textbf{All orders}\newline
+When separating by week the resulting RMSE is around 8.4 minutes which is almost the level of the other models and not usable. Also the difference increases for each algorithm, but only by a neglectable amount.
 \newline\newline\textbf{Only yum2take orders}\newline
 \section{Week and slot categorization}\label{section:Week and slot categorization}
+In Tabular \ref{tab:Week and slot categorization results} the results for week and slot categorization are shown.
 \begin{table}[h]
 \centering
 \caption{Week and slot categorization results}
-\label{Week and slot categorization results}
+\label{tab:Week and slot categorization results}
 \scalebox{0.5}{%
 \begin{tabular}{lllllll}
 \hline
@@ -161,7 +168,9 @@ SES (0.1/0.2) & 6.347103                                                 & 6.149
 \newline\newline\textbf{All orders}\newline
 \newline\newline\textbf{Only yum2take orders}\newline
 \section{Combination of Categorizations}\label{section:Combination of Categorizations}
+The results for the combined model are treated differently. Since there are over thirty thousand combinations for the weights and algorithm used, only the best results were looked at. It was decided to extract the 5 best results for the test set. The results are saved into an excel file including the algorithm used and the weighting of the different factors.
 \newline\newline\textbf{All orders}\newline
+When searching for the lowest error on the training set, the result is about 8.947 minutes. It is the result of different combinations. The most occurring one is a mix from 20\% of the forecast of the current slot and 25\% of the forecast from the current day. The rest is mostly created from the last 7 day’s forecast as well as the slot in the last 4 weeks. These combinations produce the most accurate forecasts. Overall there are only good forecasts generated by the normal moving average.
 \begin{table}[h]
 \centering
 \caption{Combination of Categorizations results for all orders}
@@ -180,6 +189,7 @@ MA        & 8.948138981   & 9.009792703   & 0.061653722 & 20    & 10     & 15   
 \end{tabular}}
 \end{table}
 \newline\newline\textbf{Only yum2take orders}\newline
+The results show that the best combination for yum2take consists of 25\% current slot’s forecast, 15\% of the current day’s forecast and 20\% of the forecast of the slot for the predecessing 7 days. The rest of weight is combined from the other forecasts and all forecasts are using moving average as algorithm. This results in an error of about 6.26 minutes.
 \begin{table}[h]
 \centering
 \caption{Combination of Categorizations results for yum2take}

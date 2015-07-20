@@ -46,13 +46,11 @@ wma_{(t)}= \frac{1}{n}\sum^{t-1}_{t-n-1} x_{(t-1)}
 Same equation also applies to orders.
 
 \subsubsection{Simple Exponential Smoothing}\label{subsubsection:Simple Exponential Smoothing}
-Another approach is the Simple Exponential Smoothing which return a smoothed forecast. A weighted average is calculated from the occurances before which is weighted by the factor $\alpha$ with the constraint 0\le $ \alpha$ \le 1. $ \alpha$  specifies the ratio between the weight of the last order's preparation time and the forecast of the values before that. The function is recursive and has no limit for the number of predecessors. The only thing which has to be defined is the starting value $ses_{start}$. Forecasting the value for point t in time is as following:
+Another approach is the Simple Exponential Smoothing which return a smoothed forecast. A weighted average is calculated from the occurrences before which is weighted by the factor $\alpha$ with the constraint 0\le $\alpha$ \le 1. $\alpha$ specifies the ratio between the weight of the last order's preparation time and the forecast of the values before that. The function is recursive and has no limit for the number of predecessors. The only thing which has to be defined is the starting value $ses_{start}$. Forecasting the value for point t in time is as following:
 
 \begin{center}
 \begin{equation}
-ses_1=\alpha*x_{0}+(1-\alpha)*ses_{start}
-\end{equation}
-\begin{equation}
-ses_t=\alpha*x_{t-1}+(1-\alpha)*ses_{t-1}
+{ses_1=\alpha*x_{0}+(1-\alpha)*ses_{start}\\
+& ses_t=\alpha*x_{t-1}+(1-\alpha)*ses_{t-1}}
 \end{equation}
 \end{center}

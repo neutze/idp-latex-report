@@ -1,1 +1,23 @@
 \chapter{Conclusion}\label{chapter:Conclusion}
+After evaluating the results a conclusion of the forecasting task can be done.
+\caption{Lessons Learned}
+Having worked so intensively with data, different learnings have been made:
+
+\begin{enumerate}
+\item The more data the better
+\item Visualize data!
+\item Categorize data!
+\item Combine learnings!
+\item Real life is hard!
+\end{enumerate}
+
+First of all, get as much information as possible. A forecast gets more precise the more data you have. There are restaurants which had many orders, like yum2take, and thus could be forecast very well. The RMSE of the test data set for this restaurant were very low since the forecast was more specific in contrast to other restaurants with almost no orders and ridiculous high RMSE.\newline
+The second learning is that visualizing the data in the preliminary analysis is always helpful. This way not only obvious bad data, like invalid values, but also things one does not think of from the start, e.g. outliers, can be identified very easily. These invalid values can then be removed and thus cannot cause any trouble in the later process if they have been forgotten from the start.\newline
+The third thing which was shown in the process of creating the forecast is that creating models with different time and other constraints helps creating a better forecast. The information gathered from these categorization can be put together in another forecast and combined with machine learning for optimized solution, which is the fourth learning.\newline
+The last learning of this task is that forecasting is much more complex than just creating a model. There are many implicit factors which have to be taken into account. But most of all a good knowledge of the company helps a lot to understand needs.
+\caption{Influence on VOLO}
+After this forecast was finished, it was presented to VOLO. The conclusion of the presentation was that even though the RMSE was improved step by step the dimension of it was not usable for real life usage since the expertise from the Operation Teams could compete with this.\newline
+In addition to the results of this forecasting, there are many factors which were identified over the time by the Operation Teams which cannot be fit into a forecast model that easily. These factors include information like the traffic for different cities, marketing campaigns or the utilization of the driver fleet. A solution for some of these factors is tried to be figured out by a dedicated team at VOLO
+\caption{Future Tasks}
+Since some time has passed since this project started and VOLO has grown, the whole forecasting task could be launched again with new sources and customers. Not only the requirements may have changed a bit but also the insights, expertise and amount of data has grown. This new knowledge could be then put into live dispatching for the drivers to validate the results with real life feedback.\newline
+The forecast could also be improved by improving the tracking of the restaurants by introducing a back channel.
