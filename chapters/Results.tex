@@ -19,6 +19,7 @@ SES (0.1/0.1) & 6.116109                                                 & 5.973
 \end{tabular}}
 \end{table}
 \newline\textbf{All orders}\newline
+The RMSE for the moving average model for this categorization is 8.4 minutes. When comparing the training to the test set the accuracy decreases by 0.15 minutes. The weighted moving average, the second type of model, has different models with different weights which range from 25 orders to 2125 orders. Most of the resulting RMSE are between 8 minutes and 8.5 minutes. There is one outlier with the weight of 2100orders and 2125 orders and 6.7 minutes and4.5 minutes. All models lose accuracy when compared to their test sets especially the outliers since they rise to the same level as the other models are.
 \newline\newline\textbf{Only yum2take orders}\newline
 The forecasts results in a RMSE of 6 minutes for the moving average model. The weighted moving average is calculated in different weights. The weights start with 25 orders and increase step by step to 675 orders. The RMSE of these forecasts is stable between 6 minutes and 6.5 minutes and the best result is achieved with a weight of 675 orders. The best RMSE for the simple exponential smoothing is the result of an $\alpha$ of 0.1. When increasing $\alpha$ the RMSE also increases to up to 8.5 minutes of RMSE. The accuracy improves for all models when using the test set by 0.07 minutes for the moving average, between 0.07 minutes up to 0.45 minutes when using the weighted version and between 0.14 minutes and 0.42 minutes for the simple exponential smoothing.
 \section{No time but slot categorization}\label{section:No time but slot categorization}
@@ -38,8 +39,7 @@ SES (0.1/0.1) & 6.065397                                                 & 5.982
 \end{tabular}}
 \end{table}
 \newline\newline\textbf{All orders}\newline
-The results for this models are around 8 minutes which is still too high but better than without the use of slots.
- The difference of RMSE for each set is again with around half a minute neglectable.
+
 \newline\newline\textbf{Only yum2take orders}\newline
 The results for yum2take the moving average results in a RMSE of little under 6 minutes. The weighted average is used with 25 and 50 order steps from which the 25 orders scores better with 6.2 minutes while 50 orders has 6.3 minutes as RMSE. The simple exponential smoothing also has a good results with close to 6 minutes for an $\alpha$ of 0.1. When increasing $\alpha$ the RMSE grows to almost 8 minutes. The accuracy between training and test set is almost zero for the moving average algorithm, improves by 0.15 minutes for the weighted moving average and also improves for all simple exponential smoothing models with a range from 0.08 minutes up to 0.47 minutes while decreasing the accuracy.
 \section{Day categorization}\label{section:Day categorization}
@@ -158,7 +158,7 @@ SES (0.3/0.2) & 6.319075                                                 & 6.163
 \end{table}
 \newline\newline\textbf{All orders}\newline
 \newline\newline\textbf{Only yum2take orders}\newline
-The weekday and slot categorization has an RMSE of 6.1 minutes for the moving average and 6.8 minutes, 6.3 minutes and an outlier of 4.4 minutes for the weighted moving average with an weight of 4, 8 and 12 weeks as weight. The difference between training set and test set is 0.07 minutes of decrease for the moving average and 0.36 minutes of improve for the first two weights of the weighted moving average. The outlier decreases its accuracy by 1.6 minutes to 5.8 minutes which is still a good result. The results for the simple exponential smoothing are around 6.4 minutes for $\alpha$ from 0.1 to 0.6 and growing to 6.77 minutes for bigger $\alpha$. The difference is between plus and minus 0.1 minute for these models.
+The weekday and slot categorization has an RMSE of 6.1 minutes for the moving average and 6.8 minutes, 6.3 minutes and an outlier of 4.4 minutes for the weighted moving average with an weight of 4, 8 and 12 weeks as weight. The difference between training set and test set is 0.07 minutes of decrease for the moving average and 0.36 minutes of improve for the first two weights of the weighted moving average. The outlier decreases its accuracy by 1.6 minutes to 5.8 minutes which is still a good result. The results for the simple exponential smoothing are around 6.4 minutes for $\alpha$ from 0.1 to 0.6 and growing to 6.77 minutes for bigger $\alpha$. The difference is between $\pm$0.1 minute for these models.
 \section{Single slot categorization}\label{section:Single slot categorization}
 For this categorization the minislot was introduced, dividing the day into 30 minutes slots which are forecasted seperately. The results are shown in Tabular \ref{Single slot categorization results}. There is no weighted moving average since some slots do not have enough data to calculate this model.
 \begin{table}[h]
@@ -220,4 +220,5 @@ MA        & 6.265946422  & 6.117772134  & -0.148174288 & 25    & 20     & 15    
 \end{table}
 
 \section{All orders versus yum2take}\label{section:All orders versus yum2take}
-It can be observed that the results for yum2take restaurant are always lower, except in some outliers cases, than when using all orders. For the restaurant the results of the forecast models are always around 6 minutes while when using all orders the resulting RMSE is about 8 minutes. The reasons and how to deal with it or use it has to be discussed in the conclusion.
+It can be observed that the results for yum2take restaurant are always lower, except in some outliers cases, than when using all orders. For the restaurant the results of the forecast models are always around 6 minutes while when using all orders the resulting RMSE is about 8 minutes. The reasons and how to deal with it or use it has to be discussed in the conclusion.\newline
+Concerning improvement or decline of accuracy of the test set over the training set it can be said that most of $\pm$
