@@ -41,8 +41,10 @@ SES (0.1/0.1) & 6.065397                                                 & 5.982
 \end{tabular}}
 \end{table}
 \newline\newline\textbf{All orders}\newline
-The results for this model are around 8 minutes which is still too high but better than without the use of slots. The difference of RMSE for each set is again with around half a minute neglectable.
+The results for this models are around 8 minutes which is still too high but better than without the use of slots.
+ The difference of RMSE for each set is again with around half a minute neglectable.
 \newline\newline\textbf{Only yum2take orders}\newline
+For yum2take the results are better than for the forecast which uses all orders. The moving average has the best result with about 6 minutes. When weighted it increases to 6.1 minutes, for both weights, namely 15 and 30 orders, which is not much difference to the training set result. Same goes for the simple exponential smoothing, where the RMSE and the difference between the sets grows the bigger $\alpha$ gets. The difference between training set is for all models neglectable because it is around 0.5 minute which has is too small for the real life scenario.
 \section{Day categorization}\label{section:Day categorization}
 The results in Tabular \ref{tab:Day categorization} are generated for categorization by day where only previous orders of the current day are taken into account for the forecast of the next value.
 \begin{table}[h]
@@ -61,6 +63,7 @@ SES (0.1/0.1) & 6.080652                                                 & 5.995
 \newline\newline\textbf{All orders}\newline
 When forecasting on daily basis most results are about 8.5 minutes. This is not an improvement over the categorizations before, even though the error decreased.
 \newline\newline\textbf{Only yum2take orders}\newline
+As before, the results for yum2take are better with a time frame from around 6 minutes instead of 8 minutes which is due to the more specific data. The moving average has one of the best results with around 6.1 minute. The moving average ranges from 6.1 to 6.6 minutes. The worst results come from the smallest (4 orders, 6.4 minutes) and greatest (16 orders, 6.6 minutes) while the weight of 8 and 12 orders has an RMSE of around 6.1 minutes. When using the simple exponential smoothing, the results range from 6.0 minutes for an $\alpha$ of 0.2 to 6.29 for an $\alpha$
 \section{Day and slot categorization}\label{section:Day and slot categorization}
 For this the data set was split into the three slots for each day. The results are shown in Tabular \ref{tab:Day and slot categorization results}.
 \begin{table}[h]
@@ -112,12 +115,14 @@ In Tabular \ref{tab:Week and slot categorization results} the results for week a
 Algorithm     & \begin{tabular}[c]{@{}l@{}}training\\ \#686\end{tabular} & \begin{tabular}[c]{@{}l@{}}test\\ \#945\end{tabular} & difference & \begin{tabular}[c]{@{}l@{}}training\\ \#2129\end{tabular} & \begin{tabular}[c]{@{}l@{}}test\\ \#3196\end{tabular} & difference \\ \hline
 MA            & 6.048462                                                 & 6.013698                                             & -0.03476   & 8.21474                                                   & 8.532601                                              & 0.31786    \\ \hline
 MA (8/12)     & 6.137753                                                 & 5.952349                                             & -0.1854    & 8.133761                                                  & 8.843515                                              & 0.709754   \\ \hline
-SES (0.3/0.3) & 5.935083                                                 & 6.155115                                             & 0.220032   & 8.18856                                                   & 8.615477                                              &            \\ \hline
+SES (0.3/0.3) & 5.935083                                                 & 6.155115                                             & 0.220032   & 8.18856                                                   & 8.615477                                              &  0.426916          \\ \hline
 \end{tabular}}
 \end{table}
 \newline\newline\textbf{All orders}\newline
+When forecasting on weekday and slot basis the RMSE there is still not much difference to the other models. The values are still between 8.2 minutes and 8.7 minutes which is not acceptable for a forecast like this.
 \newline\newline\textbf{Only yum2take orders}\newline
 \section{Weekday categorization}\label{section:Weekday categorization}
+Weekday categorization results in the following values shown in Tabular \ref{Weekday categorization results}.
 \begin{table}[h]
 \centering
 \caption{Weekday categorization results}
@@ -129,10 +134,11 @@ SES (0.3/0.3) & 5.935083                                                 & 6.155
 Algorithm     & \begin{tabular}[c]{@{}l@{}}training\\ \#686\end{tabular} & \begin{tabular}[c]{@{}l@{}}test\\ \#945\end{tabular} & difference & \begin{tabular}[c]{@{}l@{}}training\\ \#2129\end{tabular} & \begin{tabular}[c]{@{}l@{}}test\\ \#3196\end{tabular} & difference \\ \hline
 MA            & 6.208329                                                 & 6.07587                                              & -0.13245   & 8.582432                                                  & 8.660576                                              & 0.078144   \\ \hline
 MA (8/12)     & 6.181677                                                 & 6.105938                                             & -0.07573   & 8.08649                                                   & 8.700854                                              & 0.614363   \\ \hline
-SES (0.2/0.3) & 6.23239                                                  & 6.113957                                             & -0.11843   & 8.573267                                                  & 8.683558                                              &            \\ \hline
+SES (0.2/0.3) & 6.23239                                                  & 6.113957                                             & -0.11843   & 8.573267                                                  & 8.683558                                              &  0.110291          \\ \hline
 \end{tabular}}
 \end{table}
 \newline\newline\textbf{All orders}\newline
+The results of weekday categorization are also in the same value spectrum then the other models, ranging from around 8 minutes up to 8.7 minutes as RMSE.
 \newline\newline\textbf{Only yum2take orders}\newline
 \section{Weekday and slot categorization}\label{section:Weekday and slot categorization}
 \begin{table}[h]
@@ -152,6 +158,7 @@ SES (0.3/0.2) & 6.319075                                                 & 6.163
 \newline\newline\textbf{All orders}\newline
 \newline\newline\textbf{Only yum2take orders}\newline
 \section{Single slot categorization}\label{section:Single slot categorization}
+For this categorization the minislot was introduced, dividing the day into 30 minutes slots which are forecasted seperately. The results are shown in Tabular \ref{Single slot categorization results}.
 \begin{table}[h]
 \centering
 \caption{Single slot categorization results}
@@ -166,6 +173,7 @@ SES (0.1/0.2) & 6.347103                                                 & 6.149
 \end{tabular}}
 \end{table}
 \newline\newline\textbf{All orders}\newline
+This categorization results in a relatively low moving average RMSE but the other result are still high.
 \newline\newline\textbf{Only yum2take orders}\newline
 \section{Combination of Categorizations}\label{section:Combination of Categorizations}
 The results for the combined model are treated differently. Since there are over thirty thousand combinations for the weights and algorithm used, only the best results were looked at. It was decided to extract the 5 best results for the test set. The results are saved into an excel file including the algorithm used and the weighting of the different factors.
@@ -189,7 +197,7 @@ MA        & 8.948138981   & 9.009792703   & 0.061653722 & 20    & 10     & 15   
 \end{tabular}}
 \end{table}
 \newline\newline\textbf{Only yum2take orders}\newline
-The results show that the best combination for yum2take consists of 25\% current slot’s forecast, 15\% of the current day’s forecast and 20\% of the forecast of the slot for the predecessing 7 days. The rest of weight is combined from the other forecasts and all forecasts are using moving average as algorithm. This results in an error of about 6.26 minutes.
+The results show that the best combination for yum2take consists of 25\% current slot’s forecast, 15\% of the current day\’s forecast and 20\% of the forecast of the slot for the predecessing 7 days. The rest of weight is combined from the other forecasts and all forecasts are using moving average as algorithm. This results in an error of about 6.26 minutes.
 \begin{table}[h]
 \centering
 \caption{Combination of Categorizations results for yum2take}
