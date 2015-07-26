@@ -47,7 +47,7 @@ wma_{(t)}= \frac{1}{n}\sum^{t-1}_{t-n-1} x_{(t-1)}
 Same equation also applies to orders.
 
 \subsubsection{Simple Exponential Smoothing}\label{subsubsection:Simple Exponential Smoothing}
-Another approach is the Simple Exponential Smoothing which return a smoothed forecast. A weighted average is calculated from the occurrences before which is weighted by the factor $\alpha$ with the constraint 0\le $\alpha$ \le 1. $\alpha$ specifies the ratio between the weight of the last order's preparation time and the forecast of the values before that. The function is recursive and has no limit for the number of predecessors. The only thing which has to be defined is the starting value $ses_{start}$. Forecasting the value for point t in time is as following:
+Another approach is the Simple Exponential Smoothing which returns a smoothed forecast. The forecast value is calculated from the occurrences before. The two comoponents of the forecast value are weighted by the factor $\alpha$ with the constraint 0\le $\alpha$ \le 1. $\alpha$. $\alpha$ specifies the ratio between the weight of the last order's preparation time and the calculated forecast of the values before that. The function is recursive and has no limit for the number of predecessors. The only thing which has to be defined is the starting value $ses_{start}$. Forecasting the value for point t in time is as following:
 
 \begin{center}
 \begin{equation}
@@ -55,3 +55,7 @@ Another approach is the Simple Exponential Smoothing which return a smoothed for
 & ses_t=\alpha*x_{t-1}+(1-\alpha)*ses_{t-1}}
 \end{equation}
 \end{center}
+
+\subsubsection{Evaluation Criteria}
+The models can be compared by calculating the root mean square error (RMSE) which is the rooted sum of all s
+which calculated by generating a forecast value for each order and getting the square error by squaring the difference between forecasted and actual preparation time. These square errors are summed up for all orders of the restaurant, divided by the number of forecasts and then square rooted. This RMSE is then used to evaluate the result of the forecast, lower meaning better.\newline
