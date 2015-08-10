@@ -1,7 +1,7 @@
 \chapter{Results}\label{chapter:Results}
 Now that the models are set and run, their RMSE is calculated. The lower the error the more accurate the model. This will be done for the training as well as the test set and the errors will be compared and their difference will be shown. \newline
-In order to see whether the forecasting model is an improvement according to the requirements, it is compared with basic approach of the Operation Team.\newlone
-The results are presented following the enumaration of time categories done in Chapter \ref{subsection:Categorizing by Order}. The forecast is done one time with the time categorization and no slots and one time with slots.\newline
+In order to see whether the forecasting model is an improvement according to the requirements, it is compared with basic approach of the Operation Team.\newline
+The results are presented following the enumeration of time categories done in Chapter \ref{subsection:Categorizing by Order}. The forecast is done one time with the time categorization and no slots and one time with slots.\newline
 Each table represents a group of models with the same time categorization and use of slots. The algorithm used for the model is on the left while the other two columns represent the restaurant category. Since there are many options for the weighted moving average and simple exponential smoothing, only the lowest error and thus best result from the training set is displayed. This is done since when the forecast would be done, only the present result can be used and thus the lowest error would be chosen.
 \section{No time categorization}\label{section:No time categorization}
 These are the results for the models which are using no time categorization.
@@ -14,15 +14,15 @@ Tabular \ref{tab:No time categorization results} shows the results for the model
 \scalebox{0.5}{%
 \begin{tabular}{lllllll}
 \hline
-              & \multicolumn{3}{l}{yum2take}                                                                                                 & \multicolumn{3}{l}{all}                                                                                                        \\ \hline
-Algorithm     & \begin{tabular}[c]{@{}l@{}}training\\ \#686\end{tabular} & \begin{tabular}[c]{@{}l@{}}test\\ \#945\end{tabular} & difference & \begin{tabular}[c]{@{}l@{}}training\\ \#2129\end{tabular} & \begin{tabular}[c]{@{}l@{}}test\\ \#3196\end{tabular} & difference \\ \hline
-MA            & 6.02755                                                  & 5.950609                                             & -0.07694   & 8.409876                                                  & 8.565466                                              & 0.15559    \\ \hline
-MA (650/2125) & 5.738142                                                 & 5.880966                                             & 0.142823   & 4.542798                                                  & 8.976687                                              & 4.433889   \\ \hline
-SES (0.1/0.1) & 6.116109                                                 & 5.973192                                             & -0.14291   & \multicolumn{1}{l}{8.560794}                             & \multicolumn{1}{l}{8.65649}                          & 0.095695   \\ \hline
+       & \multicolumn{3}{l}{yum2take}                                                 & \multicolumn{3}{l}{all}                                                    \\ \hline
+Algorithm   & \begin{tabular}[c]{@{}l@{}}training\\ \#686\end{tabular} & \begin{tabular}[c]{@{}l@{}}test\\ \#945\end{tabular} & difference & \begin{tabular}[c]{@{}l@{}}training\\ \#2129\end{tabular} & \begin{tabular}[c]{@{}l@{}}test\\ \#3196\end{tabular} & difference \\ \hline
+MA      & 6.02755                         & 5.950609                       & -0.07694  & 8.409876                         & 8.565466                       & 0.15559  \\ \hline
+MA (650/2125) & 5.738142                         & 5.880966                       & 0.142823  & 4.542798                         & 8.976687                       & 4.433889  \\ \hline
+SES (0.1/0.1) & 6.116109                         & 5.973192                       & -0.14291  & \multicolumn{1}{l}{8.560794}               & \multicolumn{1}{l}{8.65649}             & 0.095695  \\ \hline
 \end{tabular}}
 \end{table}
 \newline\newline\textbf{No restaurant categorization}\newline
-The RMSE for the moving average model for this categorization is 8.4 minutes. When comparing the training to the test set the accuracy decreases by 0.15 minutes. The weighted moving average, the second type of model, has different models with different weights which range from 25 orders to 2125 orders. Most of the resulting RMSE are between 7.9 minutes and 8.5 minutes. There is one outlier with the weight of 2100orders and 2125 orders and 6.7 minutes and 4.5 minutes. All models lose accuracy when compared to their test sets especially the outliers since they rise to the same level as the other models are.\newline The simple exponential smoothing has the best result with 8.6 minutes for an $\alpha$ of 0.1 and rises up to 11.8 minutes for an $\alpha$ of 1.
+The RMSE for the moving average model for this categorization is 8.4 minutes. When comparing the training to the test set the accuracy decreases by 0.15 minutes. The weighted moving average, the second type of model, has different models with different weights which range from 25 orders to 2125 orders. Most of the resulting RMSE are between 7.9 minutes and 8.5 minutes. There is one outlier with the weight of 2100 orders and 2125 orders and 6.7 minutes and 4.5 minutes. All models lose accuracy when compared to their test sets especially the outliers since they rise to the same level as the other models are.\newline The simple exponential smoothing has the best result with 8.6 minutes for an $\alpha$ of 0.1 and rises up to 11.8 minutes for an $\alpha$ of 1.
 Except for the outliers, the biggest improvement over the basic approach is around 7\% when using the weighted moving average with a weight of 1850.
 \newline\newline\textbf{Restaurant categorization using yum2take}\newline
 The forecasts results in a RMSE of 6 minutes for the moving average model. The weighted moving average is calculated in different weights. The weights start with 25 orders and increase step by step to 675 orders. The RMSE of these forecasts is stable between 6 minutes and 6.5 minutes and the best result is achieved with a weight of 675 orders. The best RMSE for the simple exponential smoothing is the result of an $\alpha$ of 0.1. When increasing $\alpha$ the RMSE also increases to up to 8.5 minutes of RMSE. The accuracy improves for all models when using the test set by 0.07 minutes for the moving average, between 0.07 minutes up to 0.45 minutes when using the weighted version and between 0.14 minutes and 0.42 minutes for the simple exponential smoothing.\newline
@@ -36,11 +36,11 @@ The results of the models without time categorization but with slots are shown i
 \scalebox{0.5}{%
 \begin{tabular}{lllllll}
 \hline
-             & \multicolumn{3}{l}{yum2take}                                                                                                 & \multicolumn{3}{l}{all}                                                                                                        \\ \hline
-Algorithm    & \begin{tabular}[c]{@{}l@{}}training\\ \#686\end{tabular} & \begin{tabular}[c]{@{}l@{}}test\\ \#945\end{tabular} & difference & \begin{tabular}[c]{@{}l@{}}training\\ \#2129\end{tabular} & \begin{tabular}[c]{@{}l@{}}test\\ \#3196\end{tabular} & difference \\ \hline
-MA           & 5.980634                                                 & 5.943105                                             & -0.03752   & 8.203962                                                  & 8.514927                                              & 0.310964   \\ \hline
-MA (25/100)  & 6.165134                                                 & 6.017991                                             & -0.14714   & 7.957781                                                  & 8.492864                                              & 0.535082   \\ \hline
-SES (0.1/0.1) & 6.065397                                                 & 5.982731                                             & -0.08266   & 8.379257                                                  & 8.618189                                              & 8.618189   \\ \hline
+       & \multicolumn{3}{l}{yum2take}                                                 & \multicolumn{3}{l}{all}                                                    \\ \hline
+Algorithm  & \begin{tabular}[c]{@{}l@{}}training\\ \#686\end{tabular} & \begin{tabular}[c]{@{}l@{}}test\\ \#945\end{tabular} & difference & \begin{tabular}[c]{@{}l@{}}training\\ \#2129\end{tabular} & \begin{tabular}[c]{@{}l@{}}test\\ \#3196\end{tabular} & difference \\ \hline
+MA      & 5.980634                         & 5.943105                       & -0.03752  & 8.203962                         & 8.514927                       & 0.310964  \\ \hline
+MA (25/100) & 6.165134                         & 6.017991                       & -0.14714  & 7.957781                         & 8.492864                       & 0.535082  \\ \hline
+SES (0.1/0.1) & 6.065397                         & 5.982731                       & -0.08266  & 8.379257                         & 8.618189                       & 8.618189  \\ \hline
 \end{tabular}}
 \end{table}
 \newline\newline\textbf{No restaurant categorization}\newline
@@ -60,17 +60,17 @@ The results in Tabular \ref{tab:Day categorization} are generated for categoriza
 \scalebox{0.5}{%
 \begin{tabular}{lllllll}
 \hline
-             & \multicolumn{3}{l}{yum2take}                                                                                                 & \multicolumn{3}{l}{all}                                                                                                        \\ \hline
-Algorithm    & \begin{tabular}[c]{@{}l@{}}training\\ \#686\end{tabular} & \begin{tabular}[c]{@{}l@{}}test\\ \#945\end{tabular} & difference & \begin{tabular}[c]{@{}l@{}}training\\ \#2129\end{tabular} & \begin{tabular}[c]{@{}l@{}}test\\ \#3196\end{tabular} & difference \\ \hline
-MA           & 6.011955                                                 & 5.993232                                             & -0.01872   & 8.403266                                                  & 8.57489                                               & 0.171623   \\ \hline
-SES (0.1/0.1) & 6.080652                                                 & 5.995665                                             & -0.08498   & 8.434747                                                  & 8.57399                                               & 0.139242           \\ \hline
+       & \multicolumn{3}{l}{yum2take}                                                 & \multicolumn{3}{l}{all}                                                    \\ \hline
+Algorithm  & \begin{tabular}[c]{@{}l@{}}training\\ \#686\end{tabular} & \begin{tabular}[c]{@{}l@{}}test\\ \#945\end{tabular} & difference & \begin{tabular}[c]{@{}l@{}}training\\ \#2129\end{tabular} & \begin{tabular}[c]{@{}l@{}}test\\ \#3196\end{tabular} & difference \\ \hline
+MA      & 6.011955                         & 5.993232                       & -0.01872  & 8.403266                         & 8.57489                        & 0.171623  \\ \hline
+SES (0.1/0.1) & 6.080652                         & 5.995665                       & -0.08498  & 8.434747                         & 8.57399                        & 0.139242      \\ \hline
 \end{tabular}}
 \end{table}
 \newline\newline\textbf{No restaurant categorization}\newline
 The moving average model returns a RMSE of 8.4 minutes while the simple exponential smoothing models start with 8.4 minutes for the $\alpha$ of 0.1 and end with 9.8 minutes for the $\alpha$ of 1. The test set is slightly better than the trainings set with 0.17 minutes for the moving average model while the $\alpha$ of 0.1 has the worst decline with 0.13 for the simple exponential smoothing and the other values increase accuracy up to the best improvement of almost 1 minute for the $\alpha$ of 1.\newline
 When comparing these results with the basic approach an improvement of only 1\% can be achieved by using these time categorization.
 \newline\newline\textbf{Restaurant categorization using yum2take}\newline
-When using day and slot categorization the moving average performes well again, compared to the other models, with an RMSE of 6 minutes. The result improves for the test set by 0.08 minutes. Simple exponential smoothing returned 6.1 minutes for an $\alpha$ of 0.1 and only slowly increased to 6.9 minutes for the maximum of $\alpha$ of 1. The accuracy also improved for up to 0.4 minutes from the training to the test set.\newline
+When using day and slot categorization the moving average performs well again, compared to the other models, with an RMSE of 6 minutes. The result improves for the test set by 0.08 minutes. Simple exponential smoothing returned 6.1 minutes for an $\alpha$ of 0.1 and only slowly increased to 6.9 minutes for the maximum of $\alpha$ of 1. The accuracy also improved for up to 0.4 minutes from the training to the test set.\newline
 When using restaurant categorization and yum2take, an improvement of 30\% for the RMSE can be seen when using moving average.
 \subsection{With slot categorization}
 When using day categorization and slots Tabular \ref{tab:Day and slot categorization results} is the result.
@@ -81,15 +81,15 @@ When using day categorization and slots Tabular \ref{tab:Day and slot categoriza
 \scalebox{0.5}{%
 \begin{tabular}{lllllll}
 \hline
-             & \multicolumn{3}{l}{yum2take}                                                                                                 & \multicolumn{3}{l}{all}                                                                                                        \\ \hline
-Algorithm    & \begin{tabular}[c]{@{}l@{}}training\\ \#686\end{tabular} & \begin{tabular}[c]{@{}l@{}}test\\ \#945\end{tabular} & difference & \begin{tabular}[c]{@{}l@{}}training\\ \#2129\end{tabular} & \begin{tabular}[c]{@{}l@{}}test\\ \#3196\end{tabular} & difference \\ \hline
-MA           & 6.011955                                                 & 5.993232                                             & -0.01872   & 8.162479                                                  & 8.535424                                              & 0.372944   \\ \hline
-MA (15/60)   & 6.127325                                                 & 6.109218                                             & -0.0181    & 7.859824                                                  & 8.737695                                              & 0.87787    \\ \hline
-SES (0.1/0.1) & 6.04016                                                  & 6.104262                                             & 0.064101   & 8.220405                                                  & 8.581225                                              & 0.360819   \\ \hline
+       & \multicolumn{3}{l}{yum2take}                                                 & \multicolumn{3}{l}{all}                                                    \\ \hline
+Algorithm  & \begin{tabular}[c]{@{}l@{}}training\\ \#686\end{tabular} & \begin{tabular}[c]{@{}l@{}}test\\ \#945\end{tabular} & difference & \begin{tabular}[c]{@{}l@{}}training\\ \#2129\end{tabular} & \begin{tabular}[c]{@{}l@{}}test\\ \#3196\end{tabular} & difference \\ \hline
+MA      & 6.011955                         & 5.993232                       & -0.01872  & 8.162479                         & 8.535424                       & 0.372944  \\ \hline
+MA (15/60)  & 6.127325                         & 6.109218                       & -0.0181  & 7.859824                         & 8.737695                       & 0.87787  \\ \hline
+SES (0.1/0.1) & 6.04016                         & 6.104262                       & 0.064101  & 8.220405                         & 8.581225                       & 0.360819  \\ \hline
 \end{tabular}}
 \end{table}
 \newline\newline\textbf{No restaurant categorization}\newline
-The RMSE for the moving average model is around 8.2 minutes while the weighted moving average range from 7.9 minutes, for the best case and a weight of 60 days, to 8.3 minutes for the weight of 15 days. The simple exponential smoothing gets worse the bigger $\alpha$ becomes. It starts with 8.2 minutes for 0.1 and rises to 10.9 minutes for an $\alpha$ of 1. The accuracy decelines for all moving average variants. The standard algorithm has a decline in accuracy of 0.37 minutes while the weighted ones have inaccuracy grows from 0.24 minutes to 0.88 minutes the bigger the weight gets. For the simple exponential smoothing there is only decline for the $\alpha$ from 0.1 to 0.3, 0.36 minutes, 0.26 minutes and 0.12 minutes. The remaining $\alpha$ steadily improve the accuracy up to 1.28 minutes for the value of 1.\newline
+The RMSE for the moving average model is around 8.2 minutes while the weighted moving average range from 7.9 minutes, for the best case and a weight of 60 days, to 8.3 minutes for the weight of 15 days. The simple exponential smoothing gets worse the bigger $\alpha$ becomes. It starts with 8.2 minutes for 0.1 and rises to 10.9 minutes for an $\alpha$ of 1. The accuracy declines for all moving average variants. The standard algorithm has a decline in accuracy of 0.37 minutes while the weighted ones have inaccuracy grows from 0.24 minutes to 0.88 minutes the bigger the weight gets. For the simple exponential smoothing there is only decline for the $\alpha$ from 0.1 to 0.3, 0.36 minutes, 0.26 minutes and 0.12 minutes. The remaining $\alpha$ steadily improve the accuracy up to 1.28 minutes for the value of 1.\newline
 Using the weighted moving average of 60 orders results in an improvement of 7\%.
 \newline\newline\textbf{Restaurant categorization using yum2take}\newline
 For yum2take the results are better than for the forecast which uses all orders. The moving average has the best result with about 6 minutes. When weighted it increases to 6.1 minutes, for both weights, namely 15 and 30 orders, which is not much difference to the training set result. Same goes for the simple exponential smoothing, where the RMSE and the difference between the sets grows the bigger $\alpha$ gets. The difference between training set is for all models neglectable because it is around 0.5 minutes, which is too small to have an impact on the real life scenario.\newline
@@ -105,15 +105,15 @@ The results of categorization by week are shown in Tabular \ref{tab:Week categor
 \scalebox{0.5}{%
 \begin{tabular}{lllllll}
 \hline
-              & \multicolumn{3}{l}{yum2take}                                                                                                 & \multicolumn{3}{l}{all}                                                                                                        \\ \hline
-Algorithm     & \begin{tabular}[c]{@{}l@{}}training\\ \#686\end{tabular} & \begin{tabular}[c]{@{}l@{}}test\\ \#945\end{tabular} & difference & \begin{tabular}[c]{@{}l@{}}training\\ \#2129\end{tabular} & \begin{tabular}[c]{@{}l@{}}test\\ \#3196\end{tabular} & difference \\ \hline
-MA            & 6.074067                                                 & 5.967819                                             & -0.10624   & 8.402317                                                  & 8.568181                                              & 0.165863   \\ \hline
-MA (8/16)     & 6.120197                                                 & 5.949482                                             & -0.17071   & 8.164492                                                  & 8.814434                                              &            \\ \hline
-SES (0.2/0.2) & 6.008943                                                 & 5.981932                                             & -0.02701   & 8.399327                                                  & 8.580201                                              & 0.180873   \\ \hline
+       & \multicolumn{3}{l}{yum2take}                                                 & \multicolumn{3}{l}{all}                                                    \\ \hline
+Algorithm   & \begin{tabular}[c]{@{}l@{}}training\\ \#686\end{tabular} & \begin{tabular}[c]{@{}l@{}}test\\ \#945\end{tabular} & difference & \begin{tabular}[c]{@{}l@{}}training\\ \#2129\end{tabular} & \begin{tabular}[c]{@{}l@{}}test\\ \#3196\end{tabular} & difference \\ \hline
+MA      & 6.074067                         & 5.967819                       & -0.10624  & 8.402317                         & 8.568181                       & 0.165863  \\ \hline
+MA (8/16)   & 6.120197                         & 5.949482                       & -0.17071  & 8.164492                         & 8.814434                       &      \\ \hline
+SES (0.2/0.2) & 6.008943                         & 5.981932                       & -0.02701  & 8.399327                         & 8.580201                       & 0.180873  \\ \hline
 \end{tabular}}
 \end{table}
 \newline\newline\textbf{No restaurant categorization}\newline
-The result for the moving average model has a RMSE of 8.4 minutes. When comparing the training data set to the test data set the accuracy lowers by 0.17 minutes. The weighted moving average model with the weight of 4 orders is an outlier with 9.5 minutes. When using a weight of 8, 12 or 16 orders the RMSE lowers from 8.5 minutes to 8.2 minutes. Also when using the test set, the weight of 4 orders is still higher than the expected value with an RMSE of 8.9 minutes. In contrast to this outlier the other models only get more inaccurate, respectively 0.1 minutes, 0.29 minutes and 0.64 minutes for the three weights. The models with the simple exponential smoothing algorithm have all smiliar RMSE, ranging from 8.4 minutes to 8.55 minutes. When compared to the test set the accuracy gets slightly worse but not bigger than 0.21 minutes.\newline
+The result for the moving average model has a RMSE of 8.4 minutes. When comparing the training data set to the test data set the accuracy lowers by 0.17 minutes. The weighted moving average model with the weight of 4 orders is an outlier with 9.5 minutes. When using a weight of 8, 12 or 16 orders the RMSE lowers from 8.5 minutes to 8.2 minutes. Also when using the test set, the weight of 4 orders is still higher than the expected value with an RMSE of 8.9 minutes. In contrast to this outlier the other models only get more inaccurate, respectively 0.1 minutes, 0.29 minutes and 0.64 minutes for the three weights. The models with the simple exponential smoothing algorithm have all similiar RMSE, ranging from 8.4 minutes to 8.55 minutes. When compared to the test set the accuracy gets slightly worse but not bigger than 0.21 minutes.\newline
 Compared to the basic approach, an improvement of almost 4\% can be achieved by using the weighted moving average.
 \newline\newline\textbf{Restaurant categorization using yum2take}\newline
  The moving average model has a results with around 6.1 minute. The weighted moving average forecast models ranges from 6.1 to 6.6 minutes. The worst results come from the smallest (4 orders, 6.4 minutes) and greatest (16 orders, 6.6 minutes) while the weight of 8 and 12 orders has an RMSE of around 6.1 minutes. When using the simple exponential smoothing, the results range from 6.0 minutes for an $\alpha$ of 0.2 and slowly grows up to 6.29 for an $\alpha$ of 1. The difference between training and test data set negative for most cases, meaning the result improves for the test set.\newline
@@ -127,11 +127,11 @@ In Tabular \ref{tab:Week and slot categorization results} the results for week a
 \scalebox{0.5}{%
 \begin{tabular}{lllllll}
 \hline
-              & \multicolumn{3}{l}{yum2take}                                                                                                 & \multicolumn{3}{l}{all}                                                                                                        \\ \hline
-Algorithm     & \begin{tabular}[c]{@{}l@{}}training\\ \#686\end{tabular} & \begin{tabular}[c]{@{}l@{}}test\\ \#945\end{tabular} & difference & \begin{tabular}[c]{@{}l@{}}training\\ \#2129\end{tabular} & \begin{tabular}[c]{@{}l@{}}test\\ \#3196\end{tabular} & difference \\ \hline
-MA            & 6.048462                                                 & 6.013698                                             & -0.03476   & 8.21474                                                   & 8.532601                                              & 0.31786    \\ \hline
-MA (8/12)     & 6.137753                                                 & 5.952349                                             & -0.1854    & 8.133761                                                  & 8.843515                                              & 0.709754   \\ \hline
-SES (0.3/0.3) & 5.935083                                                 & 6.155115                                             & 0.220032   & 8.18856                                                   & 8.615477                                              &  0.426916          \\ \hline
+       & \multicolumn{3}{l}{yum2take}                                                 & \multicolumn{3}{l}{all}                                                    \\ \hline
+Algorithm   & \begin{tabular}[c]{@{}l@{}}training\\ \#686\end{tabular} & \begin{tabular}[c]{@{}l@{}}test\\ \#945\end{tabular} & difference & \begin{tabular}[c]{@{}l@{}}training\\ \#2129\end{tabular} & \begin{tabular}[c]{@{}l@{}}test\\ \#3196\end{tabular} & difference \\ \hline
+MA      & 6.048462                         & 6.013698                       & -0.03476  & 8.21474                          & 8.532601                       & 0.31786  \\ \hline
+MA (8/12)   & 6.137753                         & 5.952349                       & -0.1854  & 8.133761                         & 8.843515                       & 0.709754  \\ \hline
+SES (0.3/0.3) & 5.935083                         & 6.155115                       & 0.220032  & 8.18856                          & 8.615477                       & 0.426916     \\ \hline
 \end{tabular}}
 \end{table}
 \newline\newline\textbf{No restaurant categorization}\newline
@@ -151,18 +151,18 @@ Weekday categorization results in the following values shown in Tabular \ref{Wee
 \scalebox{0.5}{%
 \begin{tabular}{lllllll}
 \hline
-              & \multicolumn{3}{l}{yum2take}                                                                                                 & \multicolumn{3}{l}{all}                                                                                                        \\ \hline
-Algorithm     & \begin{tabular}[c]{@{}l@{}}training\\ \#686\end{tabular} & \begin{tabular}[c]{@{}l@{}}test\\ \#945\end{tabular} & difference & \begin{tabular}[c]{@{}l@{}}training\\ \#2129\end{tabular} & \begin{tabular}[c]{@{}l@{}}test\\ \#3196\end{tabular} & difference \\ \hline
-MA            & 6.208329                                                 & 6.07587                                              & -0.13245   & 8.582432                                                  & 8.660576                                              & 0.078144   \\ \hline
-MA (8/12)     & 6.181677                                                 & 6.105938                                             & -0.07573   & 8.08649                                                   & 8.700854                                              & 0.614363   \\ \hline
-SES (0.2/0.3) & 6.23239                                                  & 6.113957                                             & -0.11843   & 8.573267                                                  & 8.683558                                              &  0.110291          \\ \hline
+       & \multicolumn{3}{l}{yum2take}                                                 & \multicolumn{3}{l}{all}                                                    \\ \hline
+Algorithm   & \begin{tabular}[c]{@{}l@{}}training\\ \#686\end{tabular} & \begin{tabular}[c]{@{}l@{}}test\\ \#945\end{tabular} & difference & \begin{tabular}[c]{@{}l@{}}training\\ \#2129\end{tabular} & \begin{tabular}[c]{@{}l@{}}test\\ \#3196\end{tabular} & difference \\ \hline
+MA      & 6.208329                         & 6.07587                       & -0.13245  & 8.582432                         & 8.660576                       & 0.078144  \\ \hline
+MA (8/12)   & 6.181677                         & 6.105938                       & -0.07573  & 8.08649                          & 8.700854                       & 0.614363  \\ \hline
+SES (0.2/0.3) & 6.23239                         & 6.113957                       & -0.11843  & 8.573267                         & 8.683558                       & 0.110291     \\ \hline
 \end{tabular}}
 \end{table}
 \newline\newline\textbf{No restaurant categorization}\newline
 When using weekdays as categorization, the moving average model 8.6 minutes as RMSE. There can be made 3 models for the weighted moving average using 4, 8 and 12 weeks as weight. The results improve the more weeks are taken as weight. The first weight with 4 weeks has a RMSE of 9.1 minutes, the second one improves to 8.5 minutes while the last one is the best with an RMSE of 8.1 minutes. The simple exponential smoothing model using an $\alpha$ of 0.2 has the best result with 8.6 minutes. All other models with this algorithm range from a little above 8.6 minutes up to 8.9 minutes, increasing with growing $\alpha$. When compared to the test set all results decrease of accuracy. The moving average model decreases by 0.08 minutes while the weighted moving average increases by 0.05 minutes, but decreases then by 0.24 minutes and 0.61 minutes. The simple exponential smoothing models also decrease between 0.06 minutes to 0.12 minutes.\newline
 This categorization results in an improvement of around 5\% over the basic approach.
 \newline\newline\textbf{Restaurant categorization using yum2take}\newline
-Weekday categorization returns 6.2 minutes for the moving average model. It improves by 0.13 minutes for the test set. The weighted moving average has three different weights, 4, 8 and 12 weekdays in a row. The results are 6.7 minutes, 6.2 minutes and 6.5 minutes and they improve by 0.4 minutes for the first and thirds and by 0.07 for the second when used on the test set. When using simple exponential smoothing for this categorization the results start with 6.3 minutes of RMSE for all $\alpha$ under 0.6 and grow up to 6.9 minutes when $\alpha$ is 1. The accuracy improvement from training to test set is around 0.1 minute and then growns equaly to 0.36 minutes.\newline
+Weekday categorization returns 6.2 minutes for the moving average model. It improves by 0.13 minutes for the test set. The weighted moving average has three different weights, 4, 8 and 12 weekdays in a row. The results are 6.7 minutes, 6.2 minutes and 6.5 minutes and they improve by 0.4 minutes for the first and thirds and by 0.07 for the second when used on the test set. When using simple exponential smoothing for this categorization the results start with 6.3 minutes of RMSE for all $\alpha$ under 0.6 and grow up to 6.9 minutes when $\alpha$ is 1. The accuracy improvement from training to test set is around 0.1 minute and then grows equally to 0.36 minutes.\newline
 When using this categorization an improvement of 27\% over the basic approach can be achieved by using the moving average.
 \subsection{With slot categorization}
 The results of weekday categorization and slots is shown in Tabular \ref{Weekday and slot categorization results}.
@@ -174,15 +174,15 @@ The results of weekday categorization and slots is shown in Tabular \ref{Weekday
 \scalebox{0.5}{%
 \begin{tabular}{lllllll}
 \hline
-              & \multicolumn{3}{l}{yum2take}                                                                                                 & \multicolumn{3}{l}{all}                                                                                                        \\ \hline
-Algorithm     & \begin{tabular}[c]{@{}l@{}}training\\ \#686\end{tabular} & \begin{tabular}[c]{@{}l@{}}test\\ \#945\end{tabular} & difference & \begin{tabular}[c]{@{}l@{}}training\\ \#2129\end{tabular} & \begin{tabular}[c]{@{}l@{}}test\\ \#3196\end{tabular} & difference \\ \hline
-MA            & 6.063212                                                 & 6.13718                                              & 0.073968   & 8.448001                                                  & 8.73583                                               & 0.287828   \\ \hline
-MA (12/12)    & 4.202483                                                 & 5.802201                                             & 1.599717   & 8.117922                                                  & 8.913511                                              & 0.795589   \\ \hline
-SES (0.3/0.2) & 6.319075                                                 & 6.163683                                             & -0.15539   & 8.378466                                                  & 8.720113                                              &            \\ \hline
+       & \multicolumn{3}{l}{yum2take}                                                 & \multicolumn{3}{l}{all}                                                    \\ \hline
+Algorithm   & \begin{tabular}[c]{@{}l@{}}training\\ \#686\end{tabular} & \begin{tabular}[c]{@{}l@{}}test\\ \#945\end{tabular} & difference & \begin{tabular}[c]{@{}l@{}}training\\ \#2129\end{tabular} & \begin{tabular}[c]{@{}l@{}}test\\ \#3196\end{tabular} & difference \\ \hline
+MA      & 6.063212                         & 6.13718                       & 0.073968  & 8.448001                         & 8.73583                        & 0.287828  \\ \hline
+MA (12/12)  & 4.202483                         & 5.802201                       & 1.599717  & 8.117922                         & 8.913511                       & 0.795589  \\ \hline
+SES (0.3/0.2) & 6.319075                         & 6.163683                       & -0.15539  & 8.378466                         & 8.720113                       &      \\ \hline
 \end{tabular}}
 \end{table}
 \newline\newline\textbf{No restaurant categorization}\newline
-The results for the moving average model is matching other results with around 8.4 minutes. The weights of 4 orders, 8 orders and 12 orders return  results of 8.6 minutes, 8.3 minutes and 8.1 minutes. The simple exponential smoothing models are in the range from 8.4 minutes up to 9.6 minutes. Regarding the accuracy when compared to the test set, the moving average model declines by 0.28 minutes while the 4, 8 and 12 orders weight increase by over 0.43 minutes. An increase has the $\alpha$ of 1 with 0.07 minutes while the rest decreases its accuracy with results between 0.02 minutes and 0.34 minutes.\newline
+The results for the moving average model is matching other results with around 8.4 minutes. The weights of 4 orders, 8 orders and 12 orders return results of 8.6 minutes, 8.3 minutes and 8.1 minutes. The simple exponential smoothing models are in the range from 8.4 minutes up to 9.6 minutes. Regarding the accuracy when compared to the test set, the moving average model declines by 0.28 minutes while the 4, 8 and 12 orders weight increase by over 0.43 minutes. An increase has the $\alpha$ of 1 with 0.07 minutes while the rest decreases its accuracy with results between 0.02 minutes and 0.34 minutes.\newline
 Using this categorization and the best weighted moving average the results is an improvement of around 5\% over the basic approach.
 \newline\newline\textbf{Restaurant categorization using yum2take}\newline
 The weekday and slot categorization has an RMSE of 6.1 minutes for the moving average and 6.8 minutes, 6.3 minutes and an outlier of 4.4 minutes for the weighted moving average with an weight of 4, 8 and 12 weeks as weight. The difference between training set and test set is 0.07 minutes of decrease for the moving average and 0.36 minutes of improve for the first two weights of the weighted moving average. The outlier decreases its accuracy by 1.6 minutes to 5.8 minutes which is still a good result. The results for the simple exponential smoothing are around 6.4 minutes for $\alpha$ from 0.1 to 0.6 and growing to 6.77 minutes for bigger $\alpha$. The difference is between $\pm$0.1 minute for these models.\newline
@@ -196,10 +196,10 @@ The results of mini slot categorization are shown in Tabular \ref{Single slot ca
 \scalebox{0.5}{%
 \begin{tabular}{lllllll}
 \hline
-              & \multicolumn{3}{l}{yum2take}                                                                                                 & \multicolumn{3}{l}{all}                                                                                                        \\ \hline
-Algorithm     & \begin{tabular}[c]{@{}l@{}}training\\ \#686\end{tabular} & \begin{tabular}[c]{@{}l@{}}test\\ \#945\end{tabular} & difference & \begin{tabular}[c]{@{}l@{}}training\\ \#2129\end{tabular} & \begin{tabular}[c]{@{}l@{}}test\\ \#3196\end{tabular} & difference \\ \hline
-MA            & 6.206459                                                 & 6.078068                                             & -0.12839   & 8.122773                                                  & 8.408003                                              & 0.28523    \\ \hline
-SES (0.1/0.2) & 6.347103                                                 & 6.149942                                             & -0.19716   & 8.670448                                                  & 8.752016                                              &  0.081567          \\ \hline
+       & \multicolumn{3}{l}{yum2take}                                                 & \multicolumn{3}{l}{all}                                                    \\ \hline
+Algorithm   & \begin{tabular}[c]{@{}l@{}}training\\ \#686\end{tabular} & \begin{tabular}[c]{@{}l@{}}test\\ \#945\end{tabular} & difference & \begin{tabular}[c]{@{}l@{}}training\\ \#2129\end{tabular} & \begin{tabular}[c]{@{}l@{}}test\\ \#3196\end{tabular} & difference \\ \hline
+MA      & 6.206459                         & 6.078068                       & -0.12839  & 8.122773                         & 8.408003                       & 0.28523  \\ \hline
+SES (0.1/0.2) & 6.347103                         & 6.149942                       & -0.19716  & 8.670448                         & 8.752016                       & 0.081567     \\ \hline
 \end{tabular}}
 \end{table}
 \newline\newline\textbf{No restaurant categorization}\newline
@@ -220,14 +220,14 @@ When using one of these models the forecast gets worse by around 6\% than the ba
 \scalebox{0.5}{%
 \begin{tabular}{llllllllll}
 \hline
-yum2take  & \multicolumn{3}{l}{Results}                 & \multicolumn{6}{l}{Weights}                                                                           \\ \hline
-Algorithm & training      & test          & difference  & \multicolumn{3}{l}{slot} & \multicolumn{3}{l}{all orders}                                             \\ \hline
-          & \#2129 orders & \#3196 orders &             & today & 7 days & 4 weeks & today & 7 days & \begin{tabular}[c]{@{}l@{}}weekday\\ 4 weeks\end{tabular} \\ \hline
-MA        & 8.947472944   & 9.009768419   & 0.062295475 & 20    & 10     & 15      & 25    & 30     & 0                                                         \\ \hline
-MA        & 8.947526044   & 9.009875609   & 0.062349565 & 20    & 5      & 20      & 25    & 30     & 0                                                         \\ \hline
-MA        & 8.947812087   & 9.00973973    & 0.061927643 & 20    & 15     & 10      & 25    & 30     & 0                                                         \\ \hline
-MA        & 8.947971379   & 9.010061298   & 0.062089919 & 20    & 0      & 25      & 25    & 30     & 0                                                         \\ \hline
-MA        & 8.948138981   & 9.009792703   & 0.061653722 & 20    & 10     & 15      & 25    & 25     & 5                                                         \\ \hline
+yum2take & \multicolumn{3}{l}{Results}         & \multicolumn{6}{l}{Weights}                                      \\ \hline
+Algorithm & training   & test     & difference & \multicolumn{3}{l}{slot} & \multicolumn{3}{l}{all orders}                       \\ \hline
+     & \#2129 orders & \#3196 orders &       & today & 7 days & 4 weeks & today & 7 days & \begin{tabular}[c]{@{}l@{}}weekday\\ 4 weeks\end{tabular} \\ \hline
+MA    & 8.947472944  & 9.009768419  & 0.062295475 & 20  & 10   & 15   & 25  & 30   & 0                             \\ \hline
+MA    & 8.947526044  & 9.009875609  & 0.062349565 & 20  & 5   & 20   & 25  & 30   & 0                             \\ \hline
+MA    & 8.947812087  & 9.00973973  & 0.061927643 & 20  & 15   & 10   & 25  & 30   & 0                             \\ \hline
+MA    & 8.947971379  & 9.010061298  & 0.062089919 & 20  & 0   & 25   & 25  & 30   & 0                             \\ \hline
+MA    & 8.948138981  & 9.009792703  & 0.061653722 & 20  & 10   & 15   & 25  & 25   & 5                             \\ \hline
 \end{tabular}}
 \end{table}
 \newline\newline\textbf{Restaurant categorization using yum2take}\newline
@@ -240,13 +240,13 @@ These models improve the RMSE in contrast to the one of the basic approach by ar
 \scalebox{0.5}{%
 \begin{tabular}{llllllllll}
 \hline
-all orders  & \multicolumn{3}{l}{Results}                & \multicolumn{6}{l}{Weights}                                                                           \\ \hline
-Algorithm & training     & test         & difference   & \multicolumn{3}{l}{slot} & \multicolumn{3}{l}{all orders}                                             \\ \hline
-          & \#686 orders & \#945 orders &              & today & 7 days & 4 weeks & today & 7 days & \begin{tabular}[c]{@{}l@{}}weekday\\ 4 weeks\end{tabular} \\ \hline
-MA        & 6.265421304  & 6.118386791  & -0.147034513 & 25    & 20     & 15      & 15    & 0      & 25                                                        \\ \hline
-MA        & 6.265551527  & 6.118048866  & -0.147502661 & 25    & 20     & 15      & 15    & 5      & 20                                                        \\ \hline
-MA        & 6.265856228  & 6.117902793  & -0.147953435 & 25    & 15     & 20      & 15    & 0      & 25                                                        \\ \hline
-MA        & 6.265868384  & 6.117507337  & -0.148361047 & 25    & 15     & 20      & 15    & 5      & 20                                                        \\ \hline
-MA        & 6.265946422  & 6.117772134  & -0.148174288 & 25    & 20     & 15      & 15    & 10     & 15                                                        \\ \hline
+all orders & \multicolumn{3}{l}{Results}        & \multicolumn{6}{l}{Weights}                                      \\ \hline
+Algorithm & training   & test     & difference  & \multicolumn{3}{l}{slot} & \multicolumn{3}{l}{all orders}                       \\ \hline
+     & \#686 orders & \#945 orders &       & today & 7 days & 4 weeks & today & 7 days & \begin{tabular}[c]{@{}l@{}}weekday\\ 4 weeks\end{tabular} \\ \hline
+MA    & 6.265421304 & 6.118386791 & -0.147034513 & 25  & 20   & 15   & 15  & 0   & 25                            \\ \hline
+MA    & 6.265551527 & 6.118048866 & -0.147502661 & 25  & 20   & 15   & 15  & 5   & 20                            \\ \hline
+MA    & 6.265856228 & 6.117902793 & -0.147953435 & 25  & 15   & 20   & 15  & 0   & 25                            \\ \hline
+MA    & 6.265868384 & 6.117507337 & -0.148361047 & 25  & 15   & 20   & 15  & 5   & 20                            \\ \hline
+MA    & 6.265946422 & 6.117772134 & -0.148174288 & 25  & 20   & 15   & 15  & 10   & 15                            \\ \hline
 \end{tabular}}
 \end{table}
