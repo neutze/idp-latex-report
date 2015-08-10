@@ -1,27 +1,21 @@
 \chapter{Conclusion}\label{chapter:Conclusion}
-
-FORCAST GUT ABER WERTE SCHEIßE
-In general there are no clear patterns for which algorithm, categorie etc
-
-Now that the results of the models are generated a conclusion about the success can be done.
-\section{Lessons Learned}
-Having worked so intensively with data, different learnings have been made:
-
-\begin{enumerate}
-\item The more data the better
-\item Visualize data!
-\item Categorize data!
-\item Combine learnings!
-\item Real life is hard!
-\end{enumerate}
-
-First of all, get as much information as possible. A forecast gets more precise the more data you have. There are restaurants which had many orders, like yum2take, and thus could be forecast very well. The RMSE of the test data set for this restaurant were very low since the forecast was more specific in contrast to other restaurants with almost no orders and ridiculous high RMSE.\newline
-The second learning is that visualizing the data in the preliminary analysis is always helpful. This way not only obvious bad data, like invalid values, but also things one does not think of from the start, e.g. outliers, can be identified very easily. These invalid values can then be removed and thus cannot cause any trouble in the later process if they have been forgotten from the start.\newline
-The third thing which was shown in the process of creating the forecast is that creating models with different time and other constraints helps creating a better forecast. The information gathered from these categorization can be put together in another forecast and combined with machine learning for optimized solution, which is the fourth learning.\newline
-The last learning of this task is that forecasting is much more complex than just creating a model. There are many implicit factors which have to be taken into account. But most of all a good knowledge of the company helps a lot to understand needs.
-\section{Influence on VOLO}
-After this forecast was finished, it was presented to VOLO. The conclusion of the presentation was that even though the RMSE was improved step by step the dimension of it was not usable for real life usage since the expertise from the Operation Teams could compete with this.\newline
-In addition to the results of this forecasting, there are many factors which were identified over the time by the Operation Teams which cannot be fit into a forecast model that easily. These factors include information like the traffic for different cities, marketing campaigns or the utilization of the driver fleet. A solution for some of these factors is tried to be figured out by a dedicated team at VOLO
-\section{Future Tasks}
-Since some time has passed since this project started and VOLO has grown, the whole forecasting task could be launched again with new sources and customers. Not only the requirements may have changed a bit but also the insights, expertise and amount of data has grown. This new knowledge could be then put into live dispatching for the drivers to validate the results with real life feedback.\newline
-The forecast could also be improved by improving the tracking of the restaurants by introducing a back channel.
+The results of the models can now be evaluated and a conclusion can be made.
+\section{Result Evaluation}
+The aim of this work was to research fitting models for the preparation time of meals. These models should have significant reduction of waste over the current approach.\newline
+The models is created from different categories, the algorithm, time and restaurant category. Each model is forecasted and generates a resulting RMSE. The result was compared to the basic approach of the Operation Team.\newline
+The results are evaluated by category.\newline
+\newline\textbf{Algorithm Categorization}\newline
+When comparing models with same time and restaurant categorization, the moving average is the best. For most results it has the lowest RMSE. There are only few outlying results where another algorithm is better and this often only by under 0.2 minutes.\newline
+When using the weighted moving average the result gets better when using a greater weight. This is due to a bigger number of orders being able to compensate smaller outliers in the preparation time.\newline
+When inspecting the behaviour of the simple exponential smoothing it can seen that with increasing $\alpha$ the accuracy decreases. The most accurate $\alpha$ in most cases is the $\alpha$ of 0.1. This means the more the last preparation time is taken into account the more inaccurate the forecast gets.
+\newline\textbf{Time Categorization}\newline
+The results for the time categorization are very close to each other when they have the same restaurant categorization. The finding from this is that the time categorization has only a small impact on the forecast accuracy.
+\newline\textbf{Restaurant Categorization}\newline
+Restaurant categorization is the only categorization which has a huge impact. When using a specific restaurant in the model the accuracy increases by roughly 25\%. This might be because of restaurants being different from each other.
+\newline\textbf{Combination of Categorizations}\newline
+When using the combination of categorization in combination with the restaurant agnostic attribute, the best result is around 0.5 minutes above the result of the current approach. This does not even meet the criteria of improvement and should not be used.\newline
+When combined with the restaurant specific category, this categorization provides an improvement of about 20\%. This is a little less than the best "basic" forecasting models, but it improves when compared to the test set.
+\newline\newline
+This work can provide different forecasting models which decreases the RMSE by up to 25\% when compared to the current approach. This are not the 50\% demanded in the requirements, but show that there is space for improvement in the forecasting of the preparation time.
+\section{Future Work}
+These are the first steps in order to find a way to predict the preparation times of restaurants. The goal for future work should be to decrease the RMSE even more and thus to improve the accuracy of the forecast. As VOLO is growing, more data, orders and restaurant specific, is generated. Since more data results in a more accurate forecast, another project to improve the accuracy should be kicked off in the near future. That project should integrate the learnings of this work but also should try to find new ways which are available with a larger dataset.
