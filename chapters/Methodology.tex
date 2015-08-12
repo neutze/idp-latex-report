@@ -1,8 +1,7 @@
 \chapter{Methodology}\label{chapter:Methodology}
-The following chapter explains how the first four steps of the plan are used in the forecasting task for this Interdisciplinary Project in detail. Step five, the results and evaluation, is discussed in the next chapters.\newline
-First of all the specific problem will be defined properly. Next the information needed will be specified and gathered. This data is processed in the preliminary analysis and fitted to models.
+The following chapter in detail explains how the first four steps postulated in the book (\cite{Hyndman.2013}) are used in the forecasting task for this Interdisciplinary Project in detail. Step five, the results and evaluation, is discussed in the next chapters.\newline
 \section{Problem Definition}\label{section:Problem Definition}
-According to the process some general questions have to be solved before the forecast is started. For this purpose a stakeholder analysis is done and a SIPOC diagram is created (Table \ref{tab:sipoc}).
+According to the process, some general questions have to be solved before the forecast is started. For this purpose a stakeholder analysis is done and a SIPOC diagram is created (Table \ref{tab:sipoc}).
 
 \begin{table}[h]
 \centering
@@ -17,8 +16,8 @@ Supplier                                                                        
 \end{table}
 Emanuel Pallua is identified as the first stakeholder. He is Chief of Operations at VOLO and the one who requested the forecast. Setting boundaries and demanding his needs makes him source and customer according to the SIPOC diagram. His goal of this forecast is to decrease "waste". Waste is defined as idle times for drivers, like being at the restaurant too early or food losing freshness by lying at the restaurant for too long. Another goal is to save money by maximizing the utilization of drivers and thus decreasing the fleet size. In general he wants a robust forecasting process which can be continuously improved and automated in the future for daily usage. \newline
 The second source and customer in one person is Sebastian Sondheimer who is with Business Intelligence. His aim is to optimize the whole process of VOLO, the same as for Emanuel Pallua. He supports the forecast process by adding his knowledge of the current key numbers of VOLO. He suggests using only a few performance factors for the forecast, namely current slot (lunch, afternoon or dinner), current day, weekday, the week before and the weekday in the last month.\newline
-On technical side there Stefan Rothlehner and Sergej Krauze, both Chief Technical Officers, as sources. Stefan Rothlehner is responsible for the backend and delivers the data. The information of the orders is extracted from the PostgreSQl database which is hosted on heroku. Sergej Krauze who is responsible for the Traveling Salesman Algorithm has the requirement that the language the forecast should be written in is Java. Since his work is already in Java and the forecast, once decided that it should be integrated, could be integrated without much additional effort.\newline
-The last source and customer is the Operations Team since they are involved in the everyday business. They support the algorithm with their real life scenario knowledge. Their experience is that a 15 minute estimation works reasonably well. In their opinion a decrease of 50\% waste would make it worth to implement the algorithm. In order to have a benchmark for the results of the forecast, the error of their current assumptions will be calculated.
+On technical side there Stefan Rothlehner and Sergej Krauze, both Chief Technical Officers, as sources. Stefan Rothlehner is responsible for the backend and delivers the data. The information of the orders is extracted from the PostgreSQl database which is hosted on heroku. Sergej Krauze who is responsible for the Traveling Salesman Algorithm has the requirement that the language the forecast should be written in is Java. Since his work is already in Java and the forecast, once decided that it should be integrated, can be integrated without much additional effort.\newline
+The last source and customer is the Operations Team since they are involved in the everyday business. They support the algorithm with their real life scenario knowledge. Their experience is that a 15 minute estimation works reasonably well. In their opinion a decrease of 50\% waste will make it worth to implement the algorithm. In order to have a benchmark for the results of the forecast, the error of their current assumptions will be calculated.
 \newline\newline\textbf{Problem Statement}\newline
 The goal is to research a forecast for preparation times of meals. The approach should be simple and easy to implement with the Traveling Salesman Algorithm. Reduction of waste should be significant over the current approach.
 \section{Gathering Information}\label{section:Gathering Information}
@@ -30,7 +29,7 @@ There are many factors which can influence the preparation times of the restaura
 There are also other factors, like marketing campaigns, which can influence the results, but this has not happened in the recorded time frame.\newline
 In order to discover these patterns and get a feeling for the data the preliminary analysis is done.
 \subsection{Raw Data Cleanup}\label{subsection:Raw Data Cleanup}
-First of all the data has be cleaned and a rough overview for the dimensions of the data should be generated. This is done to get a feeling of the time frame a restaurant usually needs to prepare an order. This provides an estimation of what to expect and clue whether the result of a forecast is totally unrealistic or pretty close to what is possible. In addition to the average time analysis a visualization of the data is done as well. This is done in a time series plot on which it is very easy to see anomalies or patterns of the raw data.\newline
+First of all the data has be cleaned and a rough overview for the dimensions of the data will be generated. This is done to get a feeling of the time frame a restaurant usually needs to prepare an order. This provides an estimation of what to expect and clue whether the result of a forecast is totally unrealistic or pretty close to what is possible. In addition to the average time analysis a visualization of the data is done as well. This is done in a time series plot on which it is very easy to see anomalies or patterns of the raw data.\newline
 
 \begin{figure}[h]
 \begin{center}
@@ -75,14 +74,14 @@ That is why orders are summed up by day and visualized by average preparation ti
 \end{figure}
 
 
-Since no clear trend or pattern can be observed in a day by day analysis (Figure \ref{fig:0000_byDay_97}), a box and whisker diagram is created from the data (Figure \ref{fig:triple_boxWhisker}). It shows the median and average preparation time as line and point inside the box. The box represents the upper and lower quartile of preparation times in which 50 \% of the data is while the red whiskers visualize the area without outliers, which are red circles and a red triangle in case they are out of scale. The purpose of this graph is to give an overview of the set of values of the preparation time and the boundaries most of the orders are located in. The data was divided into different categories.\newline
+No clear trend or pattern can be observed in a day by day analysis (Figure \ref{fig:0000_byDay_97}). In order to invest time axis independent events, a box and whisker diagram is created from the data (Figure \ref{fig:triple_boxWhisker}). It shows the median and average preparation time as line and point inside the box. The box represents the upper and lower quartile of preparation times in which 50 \% of the data is while the red whiskers visualize the area without outliers, which are red circles and a red triangle in case they are out of scale. The purpose of this graph is to give an overview of the set of values of the preparation time and the boundaries most of the orders are located in. The data was divided into different categories.\newline
 \subsubsection{Week Patterns}
 The first diagram in Figure \ref{fig:triple_boxWhisker} on the left is on week basis. It was created to see if there is a trend over time as the company expertise grows. The only observation is that can be made is that after fluctuating preparation times in the first weeks it gets more constant towards the end.
 \subsubsection{Slot Patterns}
-Since no conclusion can be drawn from week analysis, a box whisker diagram for each slot was created (Figure \ref{fig:triple_boxWhisker}, middle). The day is divided into three slots, the big meals, lunch and dinner, as well as the time between these, the afternoon, which should be not as busy as the meal times. The diagram shows no real difference in preparation times between the slots so this has to be inspected in a different categorization containing slots.
+Since no conclusion can be drawn from week analysis, a box whisker diagram for each slot was created (Figure \ref{fig:triple_boxWhisker}, middle). The day is divided into three slots, the big meals, lunch and dinner, as well as the time between these, the afternoon, which is not as busy as the meal times. The diagram shows no real difference in preparation times between the slots so this has to be inspected in a different categorization containing slots.
 \subsubsection{Slot and Weekday Patterns}
-This analysis is done by visualizing the slots for each weekday in order to identify special behaviour since weekdays can have strong differences in terms of load for the restaurant (Figure \ref{fig:triple_boxWhisker}, right). This is done since it contains two different key information. Slots and weekdays alone do not have as much information as the two combined. For example on a sunday evening many people like to go to a restaurant and do not order while in the week offices sometimes order big deliveries for lunch. The values in the diagram do not vary that much which can be due to a low training dataset. It could also be separated between weekend and weekdays but there is not enough data to do this and gain additional information.\newline
-The difference between slots on weekdays as well as between weekdays is more significant than all other diagrams before and should be considered when creating the model.
+This analysis is done by visualizing the slots for each weekday in order to identify special behaviour since weekdays can have strong differences in terms of load for the restaurant (Figure \ref{fig:triple_boxWhisker}, right). This is done since it contains two different key information. Slots and weekdays alone do not have as much information as the two combined. For example on a sunday evening many people like to go to a restaurant and do not order while in the week offices sometimes order big deliveries for lunch. The values in the diagram do not vary that much which can be due to a low training dataset. It can also be separated between weekend and weekdays but there is not enough data to do this and gain additional information.\newline
+The difference between slots on weekdays as well as between weekdays is more significant than all other diagrams before and will be considered when creating the model.
 
 \begin{figure}[htp]
 
@@ -91,7 +90,7 @@ The difference between slots on weekdays as well as between weekdays is more sig
 \includegraphics[width=.3\textwidth]{images/0000_boxWhisker_slot_2129.png}\hfill
 \includegraphics[width=.3\textwidth]{images/0000_boxWhisker_weekdaySlot_2129.png}
 
-\caption{Box-Whisker diagrams with different time categorization. By Week (left), by Slot (middle) and by Weekday-Slot (right).}
+\caption{Box Whisker diagrams with different time categorization. By Week (left), by Slot (middle) and by Weekday-Slot (right).}
 \label{fig:triple_boxWhisker}
 
 \end{figure}
@@ -109,7 +108,7 @@ In order to get a first look at the restaurant specific data, a diagram with slo
 \label{fig:1_boxWhisker_weekdaySlot_686}
 \end{center}
 \end{figure}
-The distribution in the diagram for yum2take is clearly different from the overall visualization. This consolidates the assumption that restaurants should be looked at separately. The average times are also different. For the raw data 10.2 minutes are the average, when cleaning the data from invalid values it increased to 13.5 minutes and without the outliers it lowered to 13.1 minutes.
+The distribution in the diagram for yum2take is clearly different from the overall visualization. This consolidates the assumption that restaurants should be looked at separately. The average times are also different. Instead of an average of 15 minutes for the preparation of food, the restaurant specific average time for yum2take is 13.1 minutes. This finding should be investigated when creating the models.
 \subsection{Current Assumption}
 The RMSE of the current forecasting mechanism where every preparation time is supposed to be 15 minutes is calculated from the training data is 8.5 minutes.
 \section{Choosing and Fitting Models}\label{Choosing and Fitting Models}
@@ -121,13 +120,14 @@ No time categorization means that for the forecast of the current order all pred
 \newline\newline\textbf{Day Categorization}\newline
 When using day categorization, only the orders before the current one on the same day are used to calculate the forecast value. The day categorization is done since from one day to another day different conditions in the restaurant can change, e.g. staff is ill, which has an impact on that day.
 \newline\newline\textbf{Week Categorization}\newline
-The week categorization is done to take larger events in account when forecasting. Examples could be marketing campaigns. In order to consider such events, this categorization uses all predecessing orders of the calendar week for the calculation.
+The week categorization is done to take larger events in account when forecasting, e.g. marketing campaigns. In order to consider such events, this categorization uses all predecessing orders of the calendar week for the calculation.
 \newline\newline\textbf{Weekday Categorization}\newline
 Weekdays are also different from each other and have to be considered since they cause different utilization of restaurants, e.g. on sundays markets are closed and people tend to order. For this categorization all orders before the current on this weekday are used for the forecast of the order.
-\newline\newline\textbf{Single Minislot Categorization}\newline
-The minislot categorization divides the day into half hour slots. For each forecast for an order the orders before the current one in this slot are used. This is done to consider short time fluctuations caused by peak times, e.g. the half hour in which most people do their lunch or shortly before eight in the evening before the prime time movie starts.
 \newline\newline\textbf{Slot Categorization}\newline
-In the requirements three main phases, the slot, were declared. These slots are lunch, dinner and the time in between and they cause different traffic for the restaurants, lunch and dinner being high traffic while the time in between is not so crowded. In order to consider these day specific differences, it can be applied together with the other categorizations, except minislot, to improve the accuracy of the forecast. For example when using day and slot categorization, not all predecessing orders of the current day are considered for the forecast but only the ones in the slot before the current order.
+In the requirements three main phases, the slot, were declared. These slots are lunch, dinner and the time in between and they cause different traffic for the restaurants, lunch and dinner being high traffic while the time in between is not so crowded. In order to consider these day specific differences, it can be applied together with the other time categorizations, to improve the accuracy of the forecast. For example when using day and slot categorization, not all predecessing orders of the current day are considered for the forecast but only the ones in the slot before the current order. The significance of slots has been shown in Figure \ref{triple_boxWhisker}.
+\newline\newline\textbf{Single Minislot Categorization}\newline
+The minislot categorization divides the day into half hour slots. Since this granularity is finer than the slot categorization, it cannot be combined with it. For each forecast for an order the orders before the current one in this slot are used. This is done to consider short time fluctuations caused by peak times, e.g. the half hour in which most people do their lunch or shortly before eight in the evening before the prime time movie starts.
+
 
 \newline
 Before the actual forecast can be done, the edge case of not having predecessing orders for the current order, has to be resolved. Since the operations teams suggested a 15 minute basic time for preparation, this time is always taken when no forecast value can be generated for the current order.
