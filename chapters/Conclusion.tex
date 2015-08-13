@@ -1,22 +1,23 @@
 \chapter{Conclusion}\label{chapter:Conclusion}
 The results of the models can now be evaluated and a conclusion can be made.
 \section{Result Evaluation}
-The aim of this work was to research fitting models for the preparation time of meals. These models should have significant reduction of waste over the current approach.\newline
-The models is created from different categories, the algorithm, time and restaurant category. Each model is forecasted and generates a resulting RMSE. The result was compared to the basic approach of the Operation Team.\newline
+The aim of this work was to research fitting models for a forecast of preparation times of meals. These models should have significant reduction of waste over the current approach.\newline
+The models are created from different ingredients, the algorithm, time and restaurant category. Each model delivers a forecast and the quality of that forecast is evaluated as the RMSE. Each result was compared to the basic approach of the Operation Team.\newline
 The results are evaluated by category.\newline
 \newline\textbf{Algorithm Comparison}\newline
 When comparing models with same time and restaurant categorization, the moving average is the best. For most results it has the lowest RMSE. There are only few outlying results where another algorithm is better and this often only by under 0.2 minutes.\newline
-When using the weighted moving average the result gets better when using a greater weight. This is due to a bigger number of orders being able to compensate smaller outliers in the preparation time.\newline
-When inspecting the behaviour of the simple exponential smoothing it can seen that with increasing $\alpha$ the accuracy decreases. The most accurate $\alpha$ in most cases is the $\alpha$ of 0.1. This means the more the last preparation time is taken into account the more inaccurate the forecast gets.
+When using the weighted moving average the result gets better when using a greater weight, which means more orders included for each calculation. This is due to a bigger number of orders being able to compensate smaller outliers in the preparation time.\newline
+When inspecting the behaviour of the simple exponential smoothing, with increasing $\alpha$ the accuracy decreases. The most accurate $\alpha$ in most cases is the $\alpha$ of 0.1. This means the more the last preparation time is taken into account the more inaccurate the forecast gets.
 \newline\textbf{Time Categorization}\newline
 The results for the time categorization are very close to each other when they have the same restaurant categorization. The finding from this is that the time categorization has only a small impact on the forecast accuracy.
 \newline\textbf{Restaurant Categorization}\newline
-Restaurant categorization is the only categorization which has a huge impact. When using a specific restaurant in the model the accuracy increases by roughly 25\%. This proves the the assumption from \ref{subsection:Restaurant Wise Proceeding} that if the forecast is done using only a single restaurant, the accuracy improves. This is due to restaurants serving different food have different preparation times.
+Restaurant categorization is the only categorization which has a huge impact. When using a specific restaurant in the model the accuracy increases by roughly 25\%. This proves the the assumption from \ref{subsection:Restaurant Wise Proceeding} that if the forecast is done for a specific restaurant, the accuracy improves.
 \newline\textbf{Combination of Categorizations}\newline
-When using the combination of categorization in combination with the restaurant agnostic attribute, the best result is around 0.5 minutes above the result of the current approach. This does not even meet the criteria of improvement and will not be used.\newline
-When combined with the restaurant specific category, this categorization provides an improvement of about 20\%. This is a little less than the best "basic" forecasting models, but it improves when compared to the test set.
+When using the combination of categorization in combination with the restaurant agnostic attribute, the best resulting RMSE is around 0.5 minutes above the result of the current approach. This is insignificant and not in line with the requirements to improve the waste by a third..\newline
+When combined with the restaurant specific category, this categorization provides an improvement of about 20\%. This is a little less than the best "basic" forecasting models, e.g. no slots, no time categorization and a weighted moving average with an weight of 650. When compared to the test set, all results improve, which indicate that a bigger data sample increases the accuracy of the forecast.
+
 \newline\newline
-This work can provide different forecasting models which decreases the RMSE by up to 25\% when compared to the current approach. The RMSE will also improve because the data set will grow over time and create an improved foundation for the forecast.
+This work provides different forecasting models which decreases the RMSE by up to 25\% compared to the current approach. The RMSE will continue improving with the data set growing over time thus improving the foundation of the forecast.
 \section{Future Work}
-These are the first steps in order to find a way to predict the preparation times of restaurants. In the future, with a growing database, the aim should be monitoring the models. Especially how the RMSE behaves due to the greater set of input data.\newline
-In addition to the models itself, the forecast should be evaluated in the everyday business. The goal is to figure out, for which restaurants or cities the algorithm can be trusted and what external factors make the usage of the forecast not possible.
+The first steps are done, in order to find a way to predict the preparation times of restaurants. In the future, the models need continuously monitoring, as the database grows. Changes in the behaviour of the RMSE need to be observed. Especially how the RMSE behave due to the greater set of input data.\newline
+The business needs to monitor the improvements gained through the predictions and determine when they can be used for certain restaurants or parts of the business.
