@@ -3,7 +3,7 @@
 This chapter is about the sources and the information gained before starting the actual forecasting.
 \section{Research}\label{section:Research}
 In order to get a good overview over the problem, a search in Google Scholar was done. The goal was to find similar problems and approaches to it. Different words were chosen for the search, like "preparation time", "meal", "restaurant" and "forecast". The results did not give the right output for this problem. Most of the forecasting in restaurant was about the amount of staff needed, the amount of meals which will be sold over a period or the size a buffet has to
-be. These topics did not fit the problem given because the problem stated is pretty unique. There are not many companies who do last mile delivery with time critical materials. Very often the restaurant has its own fleet of driver which is available all the time and they send it when a meal has to be delivered. This has a low rate of management and is easy to implement but it costs money when the driver has nothing to do. Combining multiple restaurants with one delivery fleet and managing the fleet via a routing and timing algorithm is rather new. The time component could be implemented by using a static time for every order or a back channel when the order is placed. The first solution does not give enough time gain while the second requires a lot of infrastructure. This is why a custom approach has to be made in order to optimize the time part.
+be. These topics did not fit the problem given because the problem stated is pretty unique. There are not many companies who do last mile delivery with time critical materials. Very often the restaurant has its own fleet of drivers. They are available all the time and sent when someone has ordered a meal that has to be delivered. This needs no sophisticated management  and is easy to implement but wastes money when the driver has nothing to do. Combining multiple restaurants with one delivery fleet and managing the fleet via a routing and timing algorithm is rather new. The time component can be implemented by using a static time for every order or a back channel when the order is placed. A back channel would be an reply message by the restaurant containing the time the meal is prepared. The first solution does not give enough time gain while the second requires a lot of infrastructure. This is why a custom approach has to be made in order to optimize the time part.
 \section{Approach}\label{section:Approach and Basics}
 After searching for fitting materials, the book "Forecasting: Principles and Practice" by R. Hyndman and A. Athanasopoulos was chosen as a starting point, since it covers the topic of forecasting in general pretty good for starting the job. After reading the book, it was determined to follow the steps the book suggests to create the forecast. The book (\cite{Hyndman.2013}) has five basic steps for forecasting which will be explained in the following:
 
@@ -15,30 +15,31 @@ After searching for fitting materials, the book "Forecasting: Principles and Pra
 \item Using and Evaluating the Forecast
 \end{enumerate}
 
-In a first step, the process is mapped out and the Stakeholders and their involvement in the process is determined. They are being consulted on their view of the problem and their needs. For this purpose a SIPOC diagram can be created. With this information a problem statement is defined.\newline
+In a first step, the process of the forecast is mapped out and the Stakeholders and their contribution to the forecast is determined. They are being consulted on their view of the problem and their needs. For this purpose a SIPOC diagram can be created (\cite{SIPOC}). With this information a problem statement is defined.\newline
 In the second step, the data available for the process is determined. With the variety of restaurants, meals and levels of utilization of staff during the day, it is to be expected there will not be enough statistical data for all scenarios. In order to make up for the little and imperfect data, the expertise of the people who collected this data and who use the forecasts is also taken into account for the forecast.\newline
 The third step is the preliminary analysis. It is done to identify patterns, abnormalities and get an overview over the data. Also historic average preparation times are calculated to have a rough estimation for the outcomes of the forecast. The data is put into graphs to have a visual output and to detect invalid inputs, patterns or trends\newline
-The fourth step is to choose good models and to fit the processed data set to this models. A model is the way the data is forecast, e.g. the granularity or algorithm used.\newline
-The fifth and last step is all about using the models and getting results. The results are then evaluated and discussed how they could fit into the process.
+The fourth step is to choose good models and to fit the processed data set to these models. A model is the way the data is forecast, e.g. the granularity or algorithm used.\newline
+The fifth and last step is all about using the models and getting results. The results are then evaluated and discussed how they can fit into the process.
 \section{Forecasting Basics}\label{section:Forecast Basics}
 In order to establish a foundation for the forecast, certain key terms are specified.
 \subsection{Time Series}\label{subsection:Time Series}
 Time series are used on events that happen sequentially over time. This method puts events (forecasted or actual) onto a time axis.
-They are used in the preliminary analysis to identify abnormalities and patterns. They can also be used for better understand of the forecast results but most of the time only the numbers matter. Charting data as a graph often reveals patterns. These patterns are divided into 3 different kinds (\cite{Hyndman.2013}). The first pattern is the trend pattern. A trend is a decrease or increase over a long period of time. The second pattern is the season pattern. Seasonal patterns appear when data is influenced by seasonal factors and the effect has a known and fixed time period. The third one is the cyclic pattern. Cyclic pattern influence usually has fluctuations of at least 2 years and a unfixed period of recurrence.\newline
-Since the events at VOLO are happening on a time line, time series decomposition was the choice. The available data is transformed to a time series and divided into suitable components, in case patterns are present.
+They are used in the preliminary analysis to identify abnormalities and patterns. They can also be used to gain a better understanding of the forecast results but most of the time only the numbers matter. Charting data as a graph often reveals patterns. These patterns are divided into 3 different kinds (\cite{Hyndman.2013}). The first pattern is the trend pattern. A trend is a decrease or increase over a long period of time. The second pattern is the season pattern. Seasonal patterns appear when data is influenced by seasonal factors and the effect has a known and fixed time period. The third one is the cyclic pattern. Cyclic patterns at least fluctuate over 2 years and have not a fixed period of recurrence. An example is a rapid increase followed by a slow decrease, which is not happening every summer, but from time to time.\newline
+Orders are discrete events over time well suited to be shown in time series, so time series decomposition was the choice. The available data is transformed to a time series and divided into suitable components, in case patterns are present.
 \subsection{Algorithms for Forecasting}\label{subsection:Algorithms for Forecasting}
 The book (\cite{Hyndman.2013}) offers different algorithms to forecast on time series. Three are algorithms chosen und presented.
 \subsubsection{Moving Average}\label{subsubsection:Moving Average}
-A classical method is the moving average. It is used to iteratively calculate the next forecast value of a time series. The next values is generated by taking all prior events in account. The calculated values are independent of each other. The formula to calculate the forecast for the event at point t is:
+A classical method is the moving average. It is used to iteratively calculate the next forecast value of a time series. The next values is generated by taking all prior events in account. The calculated values are independent of each other.\newline
+The formula to calculate the forecast for the event at point t is:
 \begin{center}
 \begin{equation}
 ma_{(t)}= \frac{1}{t}\sum^{t-1}_0 x_{(t-1)}
 \end{equation}
 \end{center}
-Same equation also applies to orders.
 
 \subsubsection{Weighted Moving Average}\label{subsubsection:Weighted Moving Average}
-Instead of taking all events (as in the moving average), weighted moving average defines a window to be used, i.e. only the last x events or time frame. This window moves according to the current position on the time series. When calculating the next forecast value, the first value is removed from the window respectively when moving to the next day the first day of the frame is removed from the calculation. This way only a specific amount of orders or days stays in the calculation. The weighted moving average for point t is calculated as following:
+Instead of taking all events (as in the moving average), weighted moving average defines a weight, i.e. only the last x events or time frame, which should be used for the forecast. This window moves according to the current position on the time series. When calculating the next forecast value, the oldest value is removed from the window and the most current is added. For Instance, when moving to a new day, the time frame moves on, dropping the a day from the beginning. This way,only a specific amount of time units, e.g. days, and the associated orders stay in the calculation. The size of the window is called weight. The weight can be used in different sizes which are dependent on the number of orders available, for example when the time frame contains 20 weeks, the weights can be 4 weeks (20\%), 8 weeks (40\%) and so on.\newline
+The weighted moving average for point t is calculated as following:
 
 \begin{center}
 \begin{equation}
@@ -48,17 +49,20 @@ wma_{(t)}= \frac{1}{n}\sum^{t-1}_{t-n-1} x_{(t-1)}
 Same equation also applies to orders.
 
 \subsubsection{Simple Exponential Smoothing}\label{subsubsection:Simple Exponential Smoothing}
-Another approach is the Simple Exponential Smoothing which returns a smoothed forecast. The forecast value is calculated from the occurrences before. The two components of the forecast value are weighted by the factor $\alpha$ with the constraint 0\le $\alpha$ \le 1. $\alpha$ specifies the ratio between the weight of the last order's preparation time and the calculated forecast of the values before that. The function is recursive and has no limit for the number of predecessors. The only thing which has to be defined is the starting value $ses_{start}$. Forecasting the value for point t in time is as following:
+Another approach is the Simple Exponential Smoothing which returns a smoothed forecast. The forecast value is calculated from the occurrences before. The two components of the forecast value are weighted by the factor $\alpha$ with the constraint 0\le $\alpha$ \le 1. $\alpha$ specifies the ratio between the weight of the last order's preparation time and the calculated forecast of the values before that. The function is recursive and has no limit for the number of predecessors. The only thing which has to be defined is the starting value $ses_{start}$.\newline
+Forecasting the value for point t in time is as following:
 
-\begin{center}
 \begin{equation}
-{ses_1=\alpha*x_{0}+(1-\alpha)*ses_{start}\\
-& ses_t=\alpha*x_{t-1}+(1-\alpha)*ses_{t-1}}
+  \begin{align}
+  	ses_1 &= \alpha * x_{0} + (1 - \alpha) * ses_{start} \\
+  	ses_t&=\alpha*x_{t-1}+(1-\alpha)*ses_{t-1}
+  \end{align}
 \end{equation}
-\end{center}
+
 
 \subsubsection{Evaluation Criteria}
-In order to compare different approaches to forecast, the root mean square error (RMSE) is used. It represents sample standard deviation of the difference of the forecasted and actual value. It sums up the squared error for each calculation and divides the result by the number of calculations. The rooted result is the RMSE.
+In order to compare different approaches to forecast, the root mean square error (RMSE) is used. It represents sample standard deviation of samples actually recorded from the forecasted value. It sums up the squared error for each calculation and divides the result by the number of calculations.\newline
+The rooted result is the RMSE.
 \begin{center}
 \begin{equation}
 RMSE = \sqrt{\frac{\sum^{n}_{x=0}{(y_{forecast} - y_{actual})^{2}}}{x}}

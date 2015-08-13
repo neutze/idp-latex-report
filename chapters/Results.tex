@@ -1,12 +1,12 @@
 \chapter{Results}\label{chapter:Results}
-Now that the models are set and run, their RMSE is calculated. The lower the error the more accurate the model. This will be done for the training as well as the test set and the errors will be compared and their difference will be shown. \newline
+Now that the models are set and run, their RMSE is calculated. The lower the error the more accurate the model. This is done for the training as well as the test set and the errors will be compared and their difference will be shown. When the difference between the two sets is low, the predictive relationships of the test set are strong.\newline
 In order to see whether the forecasting model is an improvement according to the requirements, it is compared with basic approach of the Operation Team.\newline
 The results are presented following the enumeration of time categories done in Chapter \ref{subsection:Categorizing by Order}. The forecast is done one time with the time categorization and no slots and one time with slots.\newline
-Each table represents a group of models with the same time categorization and use of slots. The algorithm used for the model is on the left while the other two columns represent the restaurant category. Since there are many options for the weighted moving average and simple exponential smoothing, only the lowest error and thus best result from the training set is displayed. This is done since when the forecast would be done, only the present result can be used and thus the lowest error would be chosen.
+Each table represents a group of models with the same time categorization and use of slots. The algorithm used for the model is on the left while the other two columns represent the restaurant category. Since there are many options for the weighted moving average, generated dynamically from the sample size, and simple exponential smoothing, $\alpha$ can be between 0.1 und 1, only the lowest RMSE is shown in the field of the table. Since when the forecast will be done, only the best model will be used and thus only the lowest RMSE is of interest.
 \section{No time categorization}\label{section:No time categorization}
 These are the results for the models which are using no time categorization.
 \subsection{Without slot categorization}
-Tabular \ref{tab:No time categorization results} shows the results for the models which use no time categorization and no slots.
+Table \ref{tab:No time categorization results} shows the results for the models which use no time categorization and no slots.
 \begin{table}[h]
 \centering
 \caption{No time and slot categorization}
@@ -22,13 +22,13 @@ SES (0.1/0.1) & 6.116109                         & 5.973192                     
 \end{tabular}}
 \end{table}
 \newline\newline\textbf{No restaurant categorization}\newline
-The RMSE for the moving average model for this categorization is 8.4 minutes. When comparing the training to the test set the accuracy decreases by 0.15 minutes. The weighted moving average, the second type of model, has different models with different weights which range from 25 orders to 2125 orders. Most of the resulting RMSE are between 7.9 minutes and 8.5 minutes. There is one outlier with the weight of 2100 orders and 2125 orders and 6.7 minutes and 4.5 minutes. All models lose accuracy when compared to their test sets especially the outliers since they rise to the same level as the other models are.\newline The simple exponential smoothing has the best result with 8.6 minutes for an $\alpha$ of 0.1 and rises up to 11.8 minutes for an $\alpha$ of 1.
+The RMSE for the moving average model for this categorization is 8.4 minutes. When comparing the training to the test set the accuracy decreases by 0.15 minutes. The weighted moving average, the second type of model, has different models with different weights which range from 25 orders to 2125 orders. Most of the resulting RMSE are between 7.9 minutes and 8.5 minutes. There is one outlier with the weight of 2100 orders and 2125 orders and 6.7 minutes and 4.5 minutes. All models lose accuracy when compared to their test sets especially the outliers since they rise to the same level as the other models are. The result of the outlier is not very useful since the result of the test set proves a weak predictive relationship in the model.\newline The simple exponential smoothing has the best result with 8.6 minutes for an $\alpha$ of 0.1 and rises up to 11.8 minutes for an $\alpha$ of 1.
 Except for the outliers, the biggest improvement over the basic approach is around 7\% when using the weighted moving average with a weight of 1850.
 \newline\newline\textbf{Restaurant categorization using yum2take}\newline
 The forecasts results in a RMSE of 6 minutes for the moving average model. The weighted moving average is calculated in different weights. The weights start with 25 orders and increase step by step to 675 orders. The RMSE of these forecasts is stable between 6 minutes and 6.5 minutes and the best result is achieved with a weight of 675 orders. The best RMSE for the simple exponential smoothing is the result of an $\alpha$ of 0.1. When increasing $\alpha$ the RMSE also increases to up to 8.5 minutes of RMSE. The accuracy improves for all models when using the test set by 0.07 minutes for the moving average, between 0.07 minutes up to 0.45 minutes when using the weighted version and between 0.14 minutes and 0.42 minutes for the simple exponential smoothing.\newline
 When using the restaurant categorization for this time categorization, an improvement up to 30\% for the moving average can be observed.
 \subsection{With slot categorization}
-The results of the models without time categorization but with slots are shown in Tabular \ref{tab:No time but slot categorization results}.
+The results of the models without time categorization but with slots are shown in Table \ref{tab:No time but slot categorization results}.
 \begin{table}[h]
 \centering
 \caption{No time but slot categorization}
@@ -52,7 +52,7 @@ When using the moving average an improvement of almost 30\% can be achieved in c
 \section{Day categorization}\label{section:Day categorization}
 These are the models using day categorization and their results.
 \subsection{Without slot categorization}
-The results in Tabular \ref{tab:Day categorization} are generated for categorization by day. There is no weighted moving average model since there has not been enough data to do forecast in a convenient manner.
+The results in Table \ref{tab:Day categorization} are generated for categorization by day. There is no weighted moving average model since there has not been enough data to do forecast in a convenient manner.
 \begin{table}[h]
 \centering
 \caption{Day categorization without slots}
@@ -73,7 +73,7 @@ When comparing these results with the basic approach an improvement of only 1\% 
 When using day and slot categorization the moving average performs well again, compared to the other models, with an RMSE of 6 minutes. The result improves for the test set by 0.08 minutes. Simple exponential smoothing returned 6.1 minutes for an $\alpha$ of 0.1 and only slowly increased to 6.9 minutes for the maximum of $\alpha$ of 1. The accuracy also improved for up to 0.4 minutes from the training to the test set.\newline
 When using restaurant categorization and yum2take, an improvement of 30\% for the RMSE can be seen when using moving average.
 \subsection{With slot categorization}
-When using day categorization and slots Tabular \ref{tab:Day and slot categorization results} is the result.
+When using day categorization and slots Table \ref{tab:Day and slot categorization results} is the result.
 \begin{table}[h]
 \centering
 \caption{Day categorization with slots}
@@ -97,7 +97,7 @@ For restaurant categorization and yum2take an improvement of around 30\% over th
 \section{Week categorization}\label{section:Week categorization}
 The following results are generated by the models using week categorization for the time categorization.
 \subsection{Without slot categorization}
-The results of categorization by week are shown in Tabular \ref{tab:Week categorization result}.
+The results of categorization by week are shown in Table \ref{tab:Week categorization result}.
 \begin{table}[h]
 \centering
 \caption{Week categorization without slots}
@@ -119,7 +119,7 @@ Compared to the basic approach, an improvement of almost 4\% can be achieved by 
  The moving average model has a results with around 6.1 minute. The weighted moving average forecast models ranges from 6.1 to 6.6 minutes. The worst results come from the smallest (4 orders, 6.4 minutes) and greatest (16 orders, 6.6 minutes) while the weight of 8 and 12 orders has an RMSE of around 6.1 minutes. When using the simple exponential smoothing, the results range from 6.0 minutes for an $\alpha$ of 0.2 and slowly grows up to 6.29 for an $\alpha$ of 1. The difference between training and test data set negative for most cases, meaning the result improves for the test set.\newline
  When using moving average, an improvement of 28\% over the basic approach can be achieved.
 \subsection{With slot categorization}
-In Tabular \ref{tab:Week and slot categorization results} the results for week and slot categorization are shown.
+In Table \ref{tab:Week and slot categorization results} the results for week and slot categorization are shown.
 \begin{table}[h]
 \centering
 \caption{Week categorization with slots}
@@ -143,7 +143,7 @@ Compared to the basic approach, using this categorization and the moving average
 \section{Weekday categorization}\label{section:Weekday categorization}
 The following models use weekday categorization with and without slots.
 \subsection{Without slot categorization}
-Weekday categorization results in the following values shown in Tabular \ref{Weekday categorization results}.
+Weekday categorization results in the following values shown in Table \ref{Weekday categorization results}.
 \begin{table}[h]
 \centering
 \caption{Weekday categorization without slots}
@@ -165,7 +165,7 @@ This categorization results in an improvement of around 5\% over the basic appro
 Weekday categorization returns 6.2 minutes for the moving average model. It improves by 0.13 minutes for the test set. The weighted moving average has three different weights, 4, 8 and 12 weekdays in a row. The results are 6.7 minutes, 6.2 minutes and 6.5 minutes and they improve by 0.4 minutes for the first and thirds and by 0.07 for the second when used on the test set. When using simple exponential smoothing for this categorization the results start with 6.3 minutes of RMSE for all $\alpha$ under 0.6 and grow up to 6.9 minutes when $\alpha$ is 1. The accuracy improvement from training to test set is around 0.1 minute and then grows equally to 0.36 minutes.\newline
 When using this categorization an improvement of 27\% over the basic approach can be achieved by using the moving average.
 \subsection{With slot categorization}
-The results of weekday categorization and slots is shown in Tabular \ref{Weekday and slot categorization results}.
+The results of weekday categorization and slots is shown in Table \ref{Weekday and slot categorization results}.
 
 \begin{table}[h]
 \centering
@@ -188,7 +188,7 @@ Using this categorization and the best weighted moving average the results is an
 The weekday and slot categorization has an RMSE of 6.1 minutes for the moving average and 6.8 minutes, 6.3 minutes and an outlier of 4.4 minutes for the weighted moving average with an weight of 4, 8 and 12 weeks as weight. The difference between training set and test set is 0.07 minutes of decrease for the moving average and 0.36 minutes of improve for the first two weights of the weighted moving average. The outlier decreases its accuracy by 1.6 minutes to 5.8 minutes which is still a good result. The results for the simple exponential smoothing are around 6.4 minutes for $\alpha$ from 0.1 to 0.6 and growing to 6.77 minutes for bigger $\alpha$. The difference is between $\pm$0.1 minute for these models.\newline
 The results of this categorization, when leaving outliers out, are an increase of 28\% over the basic approach.
 \section{Mini slot categorization}\label{section:Single slot categorization}
-The results of mini slot categorization are shown in Tabular \ref{Single slot categorization results}. There is no weighted moving average since some slots do not have enough data to calculate this model.
+The results of mini slot categorization are shown in Table \ref{Single slot categorization results}. There is no weighted moving average since some slots do not have enough data to calculate this model.
 \begin{table}[h]
 \centering
 \caption{Mini slot categorization results}
@@ -209,7 +209,7 @@ When using this categorization an improvement of around 5\% over the basic appro
 The moving average model returns 6.2 minutes RMSE and an improvement in accuracy of 0.13 minutes when using the test set. The simple exponential smoothing models start with a RMSE of 6.3 minutes for the $\alpha$ of 0.1 and increase to over 8.0 minutes for an $\alpha$ of 1. The increase in accuracy for all models with this algorithm is below 0.20 minutes.\newline
 THis categorization is an increase of 27\% over the basic approach when using the moving average algorithm.
 \section{Combination of Categorizations}\label{section:Combination of Categorizations}
-The results for the combined model are treated differently. Since there are over thirty thousand combinations for the weights and algorithm used, only the best results were looked at. These are the 5 best results for the test set including the algorithm used and the weighting of the different time categorizations.
+The results for the combined model are treated differently. Since there are over thirty thousand combinations for the weights and algorithm used, only the best results were looked at. This is why only the 5 best results for the test set are shown. In additional to the RMSE, the algorithm used and the weighting of the different time categorizations is included.
 \newline\newline\textbf{No restaurant categorization}\newline
 When searching for the lowest error on the training set, the result is about 8.947 minutes. It is the result of different combinations. The most occurring one is a mix from 20\% of the forecast of the current slot and 25\% of the forecast from the current day. The rest is mostly created from the last 7 day’s forecast as well as the slot in the last 4 weeks. These combinations produce the most accurate forecasts. Overall there are only good forecasts generated by the normal moving average. When using the test set to compare the result to the training set the accuracy drops by around 0.06 minutes for the top five models.\newline
 When using one of these models the forecast gets worse by around 6\% than the basic approach.
