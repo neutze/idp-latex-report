@@ -33,17 +33,22 @@ A classical method is the moving average. It is used to iteratively calculate th
 The formula to calculate the forecast for the event at point t is:
 \begin{center}
 \begin{equation}
-ma_{(t)}= \frac{1}{t}\sum^{t-1}_0 x_{(t-1)}
+ma_{(t)}= \frac{1}{t}\sum^{t-1}_{l = 0} x_{l}
 \end{equation}
 \end{center}
 
+Same equation also applies to orders.
+
 \subsubsection{Weighted Moving Average}\label{subsubsection:Weighted Moving Average}
-Instead of taking all events (as in the moving average), weighted moving average defines a weight, i.e. only the last x events or time frame, which should be used for the forecast. This window moves according to the current position on the time series. When calculating the next forecast value, the oldest value is removed from the window and the most current is added. For Instance, when moving to a new day, the time frame moves on, dropping the a day from the beginning. This way,only a specific amount of time units, e.g. days, and the associated orders stay in the calculation. The size of the window is called weight. The weight can be used in different sizes which are dependent on the number of orders available, for example when the time frame contains 20 weeks, the weights can be 4 weeks (20\%), 8 weeks (40\%) and so on.\newline
+Instead of taking all events (as in the moving average), weighted moving average defines a weight, i.e. only the last x events or time frame, which should be used for the forecast. This window moves according to the current position on the time series. When calculating the next forecast value, the oldest value is removed from the window and the most current is added. For Instance, when moving to a new day, the time frame moves on, dropping the a day from the beginning. This way,only a specific amount of time units, e.g. days, and the associated orders stay in the calculation.
+
+
+The size of the window is called weight. The weight can be used in different sizes which are dependent on the number of orders available, for example when the time frame contains 20 weeks, the weights can be 4 weeks (20\%), 8 weeks (40\%) and so on.\newline
 The weighted moving average for point t is calculated as following:
 
 \begin{center}
 \begin{equation}
-wma_{(t)}= \frac{1}{n}\sum^{t-1}_{t-n-1} x_{(t-1)}
+wma_{(t)}= \frac{1}{n}\sum^{t-1}_{l = t-n-1} x_{l}
 \end{equation}
 \end{center}
 Same equation also applies to orders.
