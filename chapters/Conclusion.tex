@@ -4,18 +4,19 @@ The results of the models can now be evaluated and a conclusion can be made.
 The aim of this work was to research fitting models for the preparation time of meals. These models should have significant reduction of waste over the current approach.\newline
 The models is created from different categories, the algorithm, time and restaurant category. Each model is forecasted and generates a resulting RMSE. The result was compared to the basic approach of the Operation Team.\newline
 The results are evaluated by category.\newline
-\newline\textbf{Algorithm Categorization}\newline
+\newline\textbf{Algorithm Comparison}\newline
 When comparing models with same time and restaurant categorization, the moving average is the best. For most results it has the lowest RMSE. There are only few outlying results where another algorithm is better and this often only by under 0.2 minutes.\newline
 When using the weighted moving average the result gets better when using a greater weight. This is due to a bigger number of orders being able to compensate smaller outliers in the preparation time.\newline
 When inspecting the behaviour of the simple exponential smoothing it can seen that with increasing $\alpha$ the accuracy decreases. The most accurate $\alpha$ in most cases is the $\alpha$ of 0.1. This means the more the last preparation time is taken into account the more inaccurate the forecast gets.
 \newline\textbf{Time Categorization}\newline
 The results for the time categorization are very close to each other when they have the same restaurant categorization. The finding from this is that the time categorization has only a small impact on the forecast accuracy.
 \newline\textbf{Restaurant Categorization}\newline
-Restaurant categorization is the only categorization which has a huge impact. When using a specific restaurant in the model the accuracy increases by roughly 25\%. This might be because of restaurants being different from each other.
+Restaurant categorization is the only categorization which has a huge impact. When using a specific restaurant in the model the accuracy increases by roughly 25\%. This proves the the assumption from \ref{subsection:Restaurant Wise Proceeding} that if the forecast is done using only a single restaurant, the accuracy improves. This is due to restaurants serving different food have different preparation times.
 \newline\textbf{Combination of Categorizations}\newline
-When using the combination of categorization in combination with the restaurant agnostic attribute, the best result is around 0.5 minutes above the result of the current approach. This does not even meet the criteria of improvement and should not be used.\newline
+When using the combination of categorization in combination with the restaurant agnostic attribute, the best result is around 0.5 minutes above the result of the current approach. This does not even meet the criteria of improvement and will not be used.\newline
 When combined with the restaurant specific category, this categorization provides an improvement of about 20\%. This is a little less than the best "basic" forecasting models, but it improves when compared to the test set.
 \newline\newline
-This work can provide different forecasting models which decreases the RMSE by up to 25\% when compared to the current approach. This are not the 50\% demanded in the requirements, but show that there is space for improvement in the forecasting of the preparation time.
+This work can provide different forecasting models which decreases the RMSE by up to 25\% when compared to the current approach. The RMSE will also improve because the data set will grow over time and create an improved foundation for the forecast.
 \section{Future Work}
-These are the first steps in order to find a way to predict the preparation times of restaurants. The goal for future work should be to decrease the RMSE even more and thus to improve the accuracy of the forecast. As VOLO is growing, more data, orders and restaurant specific, is generated. Since more data results in a more accurate forecast, another project to improve the accuracy should be kicked off in the near future. That project should integrate the learnings of this work but also should try to find new ways which are available with a larger dataset.
+These are the first steps in order to find a way to predict the preparation times of restaurants. In the future, with a growing database, the aim should be monitoring the models. Especially how the RMSE behaves due to the greater set of input data.\newline
+In addition to the models itself, the forecast should be evaluated in the everyday business. The goal is to figure out, for which restaurants or cities the algorithm can be trusted and what external factors make the usage of the forecast not possible.
