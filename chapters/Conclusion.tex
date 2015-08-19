@@ -1,13 +1,13 @@
 \chapter{Conclusion}\label{chapter:Conclusion}
-The results of the models can now be evaluated and a conclusion can be made.
+The results of the models are now evaluated and a conclusion is drawn.
 \section{Result Evaluation}
 The aim of this work was to research fitting models for a forecast of preparation times of meals. These models should have significant reduction of waste over the current approach.\newline
-The models are created from different ingredients, the algorithm, time and restaurant category. Each model delivers a forecast and the quality of that forecast is evaluated as the RMSE. Each result was compared to the basic approach of the Operation Team.\newline
+The models are created from different ingredients, the algorithm, time and restaurant category. Each model delivers a forecast, including a RMSE, which indicates the waste to be expected, and a difference of test and training data set, which indicates the relevance. Each result was compared to the basic approach of the Operation Team.\newline
 The results are evaluated by category.\newline
 \newline\textbf{Algorithm Comparison}\newline
 When comparing models with same time and restaurant categorization, the moving average is the best. For most results it has the lowest RMSE. There are only few outlying results where another algorithm is better and this often only by under 0.2 minutes.\newline
 When using the weighted moving average the result gets better when using a greater weight, which means more orders included for each calculation. This is due to a bigger number of orders being able to compensate smaller outliers in the preparation time.\newline
-When inspecting the behaviour of the simple exponential smoothing, with increasing $\alpha$ the accuracy decreases. The most accurate $\alpha$ in most cases is the $\alpha$ of 0.1. This means the more the last preparation time is taken into account the more inaccurate the forecast gets.
+When inspecting the behaviour of the simple exponential smoothing, with increasing $\alpha$ the accuracy decreases. The most accurate result in most cases is gained with an $\alpha$ of 0.1. This means the more the forecast relies on previous forecasts, the better it becomes.
 \newline\textbf{Time Categorization}\newline
 The results for the time categorization are very close to each other when they have the same restaurant categorization. The finding from this is that the time categorization has only a small impact on the forecast accuracy.
 \newline\textbf{Restaurant Categorization}\newline
@@ -19,5 +19,5 @@ When combined with the restaurant specific category, this categorization provide
 \newline\newline
 This work provides different forecasting models which decreases the RMSE by up to 25\% compared to the current approach. The RMSE will continue improving with the data set growing over time thus improving the foundation of the forecast.
 \section{Future Work}
-The first steps are done, in order to find a way to predict the preparation times of restaurants. In the future, the models need continuously monitoring, as the database grows. Changes in the behaviour of the RMSE need to be observed. Especially how the RMSE behave due to the greater set of input data.\newline
+The foundation is laid for finding a way to predict the preparation times of restaurants. In the future, the models need continuous monitoring, as the database grows. When RMSE values go consistently below 5.6 minutes, this indicates waste is effectively avoided and the forecast is ready for implementation into daily operation.\newline
 The business needs to monitor the improvements gained through the predictions and determine when they can be used for certain restaurants or parts of the business.
