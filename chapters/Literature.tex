@@ -48,7 +48,7 @@ wma_{(t)}= \frac{1}{n}\sum^{t-1}_{l = t-n-1} x_{l}
 \end{center}
 
 \subsubsection{Simple Exponential Smoothing}\label{subsubsection:Simple Exponential Smoothing}
-Another approach is the Simple Exponential Smoothing which returns a smoothed forecast. The forecast value is calculated recursively from all occurrences before. The two components to forecast the next value, last order's preparation time and the calculated forecast for it, are weighted by the factor $\alpha$ with the constraint 0\le $\alpha$ \le 1. $\alpha$ specifies the ratio between these two. The only thing which has to be defined is the starting value $ses_{start}$.\newline
+Another approach is the Simple Exponential Smoothing which returns a smoothed forecast. The forecast value is calculated recursively from all occurrences before. The two components to forecast the next value, last order's preparation time and the calculated forecast for it, are weighted by the factor $\alpha$ with the constraint $0$ $\le$ $\alpha$ $\le$ $1$. The $\alpha$ specifies the ratio between these two. The only thing which has to be defined is the starting value $ses_{start}$.\newline
 Forecasting the value for event t is as following:
 
 \begin{equation}
