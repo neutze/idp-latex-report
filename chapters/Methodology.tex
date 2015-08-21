@@ -5,7 +5,7 @@ According to the process, some general questions have to be solved before the fo
 
 \begin{table}[h]
 \centering
-\caption{SIPOC Diagram derived from the five basic steps}
+\caption{SIPOC diagram derived from the five basic steps}
 \label{tab:sipoc}
 \scalebox{0.75}{%
 \begin{tabular}{|l|l|l|l|l|}
@@ -21,9 +21,10 @@ The last source and customer is the Operations Team since they are involved in t
 \newline\newline\textbf{Problem Statement}\newline
 The goal is to research a forecast for preparation times of meals. The approach should be simple and easy to implement together with the Traveling Salesman Algorithm. Reduction of waste should be significant over the current approach.
 \section{Gathering Information}\label{section:Gathering Information}
-The data for the forecast is taken from the PostgreSQL database of the backend. Every order from the beginning of VOLO in September 2014 has been processed and stored in this database. Each order has timestamps for each step of the delivery process. This way a rich set of historical data has piled up and is available. For this interdisciplinary project, two data samples are downloaded at different points in time, the training data set and the test data set. The training data set is used to "train" the model and find potential relationships. It creates the first forecast. The result of the forecast is then compared to the result of the test data set. This gives information about the prediction abilities of the model. When the two results are significantly different, the predictive relationships do not hold. The two data sets were dumped on the 26th of March and the 29th of April and contain 3034 and 4973 orders respectively. The downloaded data sets were saved in comma separated values files, known as csv files. Since VOLO was bought and moved to Berlin in April 2015, the company has grown very fast and with it came different problems in operations, e.g. too little expertise of the city's operations team or drivers in new cities. In order to have a forecast for a "working" system, only data from the Munich times was used, when the process was completely supervised by people who had done this for a longer time. New data can be used again when the operations have risen to normality, as observed before the move.\newline
+The data for the forecast is taken from the PostgreSQL database of the backend. Every order from the beginning of VOLO in September 2014 has been processed and stored in this database. Each order has timestamps for each step of the delivery process. This way a rich set of historical data has piled up and is available. For this interdisciplinary project, two data samples are downloaded at different points in time, the Training Data Set and the Test Data Set. The Training Data Set is used to "train" the model and find potential relationships. It creates the first forecast. The result of the forecast is then compared to the result of the Test Data Set. This gives information about the prediction abilities of the model. When the two results are significantly different, the predictive relationships do not hold. As the Test Data Set is bigger than the Training Set, it also gives an indication how the results may improve as more data becomes available. The two data sets were dumped on the 26th of March and the 29th of April and contain 3034 and 4973 orders respectively. The downloaded data sets were saved in comma separated values files, known as csv files. Since VOLO was bought and moved to Berlin in April 2015, the company has grown very fast and with it came different problems in operations, e.g. too little expertise of the city's operations team or drivers in new cities. In order to have a forecast for a "working" system, only data from the Munich times was used, when the process was completely supervised by people who had done this for a longer time. New data can be used again when the operations have risen to normality, as observed before the move.
+\newpage
 The raw data has some weaknesses. The biggest one is the size of the gathered data, i.e. the lack of data items for some of the more granular categories defined later. Forecasts need big amounts of information to generate a meaningful result. Since some restaurants have too few orders or a lot of bad data for the preparation times, additional expertise has to be put into the forecast. This expertise is taken from the Operation Team. They have to deal with orders on a daily basis and right now have to "forecast" the point in time the driver has to be at the restaurant on their own. In their experience, an estimation of around 15 minutes to prepare an order is a more or less accurate guess for most restaurants except for some which are known for their unpredictability.\newline
-In order to use the datasets from the csv files, they have to be to be parsed into objects in the Java program. For this purpose a csv parser library is used. The library reads the csv file and matches the orders from the database to the OrderModel.class of the code. Not all attributes of the database are used, only the ones related to the forecast are picked from the information. Since there is no tracking in the restaurant for the preparation time per se, it was decided to take the time interval from the point in time at which the restaurant receives the notification for the order until the driver leaves the restaurant. In the process of volo, the printer in the restaurant prints the receipt when the driver accepts the delivery, which is saved in the database as \texttt{accepted\_at}. The timestamp of the driver leaving the restaurant is saved in \texttt{delivery\_started\_at}. Since it is not the task to figure out the exact preparation time but rather the time between when the order is sent to the restaurant and when the driver can pick it up,  these two time stamps can be used, so the clock for the preparation time starts ticking on accepted_at and stops at delivery_started.
+In order to use the datasets from the csv files, they have to be parsed into objects in the Java program. For this purpose a csv parser library is used. The library reads the csv file and matches the orders from the database to the OrderModel.class of the code. Not all attributes of the database are used, only the ones related to the forecast are picked from the information. Since there is no tracking in the restaurant for the preparation time per se, it was decided to take the time interval from the point in time at which the restaurant receives the notification for the order until the driver leaves the restaurant. In the process of volo, the printer in the restaurant prints the receipt when the driver confirms her assignment to this delivery, which is saved in the database as \texttt{accepted\_at}. The timestamp of the driver leaving the restaurant is saved in \texttt{delivery\_started\_at}. Since it is not the task to figure out the exact preparation time but rather the time between when the order is sent to the restaurant and when the driver can pick it up,  these two time stamps can be used, so the clock for the preparation time starts ticking on \texttt{accepted\_at} and stops at \texttt{delivery\_started}.
 \section{Preliminary Analysis}\label{section:Preliminary Analysis}
 There are many factors which can influence the preparation times of the restaurant. Some are of external nature, some internal. The weather or season can have an effect or if a cook is ill.\newline
 Marketing campaigns may boost orders short term, which can influence the results, but this has not happened in the recorded time frame.\newline
@@ -39,7 +40,7 @@ First of all, the data has to be cleaned and a rough overview for the dimensions
 \end{center}
 \end{figure}
 
-As the first step of the raw data cleanup, the training data is put into a time series graph with orders plotted with their preparation times (Fig. \ref{fig:0000_raw_3035}). It still contains unfinished orders and orders which have corrupted or missing timestamps. These orders cannot be transformed correctly and receive a total time of "-1" since their \texttt{accepted\_at} timestamp is not usable. In case the orders \texttt{delivery\_started\_at} timestamp is before the \texttt{accepted\_at} timestamp a negative value is visible. These events unrealistically reduce the average preparation time to 12 minutes and can be easily spotted in the time series graph. In order to get realistic results, these flaws in the data set have to be removed. This is done by ignoring all values which are below 0 minutes in the forecast. This action increases the average preparation time to 16 minutes which is much higher than the first result but free of misleading values. The data set which, in contrast to Figure \ref{fig:0000_raw_3035}, does not contain any negative values, is visualised in Figure \ref{fig:0000_invalid_2204}.
+As the first step of the raw data cleanup, the training data is put into a time series graph with orders plotted with their preparation times (Fig. \ref{fig:0000_raw_3035}). It still contains unfinished orders and orders which have corrupted or missing timestamps. These orders cannot be transformed correctly and receive a total time of "-1" since their \texttt{accepted\_at} timestamp is not usable. In case the orders \texttt{delivery\_started\_at} timestamp is before the \texttt{accepted\_at} timestamp a negative value is visible. These events unrealistically reduce the average preparation time to 12 minutes and can be easily spotted in the time series graph. In order to get realistic results, these flaws in the data set have to be removed. This is done by ignoring all values which are below 0 minutes in the forecast. This action increases the average preparation time to 16 minutes which is much higher than the first result but free of misleading values. The data set which, in contrast to Figure \ref{fig:0000_raw_3035}, does not contain any negative values, is visualized in Figure \ref{fig:0000_invalid_2204}.
 
 \begin{figure}[h]
 \begin{center}
@@ -49,7 +50,7 @@ As the first step of the raw data cleanup, the training data is put into a time 
 \end{center}
 \end{figure}
 
-After removing the obviously invalid and corrupted orders the data looks a lot more consistent. The next problem are the orders which were finished long after they have been started. It has to be assumed that these times were either caused by bugged software or human error in the process. These data points are removed from the data set. For this purpose the Grubbs training for outliers is applied to the dataset and all values that seem not to come from a normally distributed population are removed (\cite{Grubbs}). Figure \ref{fig:0000_grubbed_2201} shows how this action influences the graph. The change can be noted in the scale of the diagram, which is now much more granular. This results in an average preparation time of 15 minutes which is the same result as the operations team suggest to use as a basis.
+\newpage After removing the obviously invalid and corrupted orders the data looks a lot more consistent. The next problem are the orders which were finished long after they have been started. It has to be assumed that these times were either caused by bugged software or human error in the process. These data points are removed from the data set. For this purpose the Grubbs training for outliers is applied to the dataset and all values that seem not to come from a normally distributed population are removed (\cite{Grubbs}). Figure \ref{fig:0000_grubbed_2201} shows how this action influences the graph. The change can be noted in the scale of the diagram, which is now much more granular. This results in an average preparation time of 15 minutes which is the same result as the operations team suggest to use as a basis.
 
 \begin{figure}[h]
 \begin{center}
@@ -59,11 +60,12 @@ After removing the obviously invalid and corrupted orders the data looks a lot m
 \end{center}
 \end{figure}
 
+All these steps from the clean up of the data are also applied to the Test Data Set which is used later.
 
 \subsection{Identifying Patterns}
 Now, as only the usable dataset is extracted from the input data, it can be analyzed for patterns, trends or similarities. For this purpose a time component has to be introduced into the graph since putting order after order does not reveal patterns.
 \subsubsection{Daily Patterns}
-As a first try, orders are summed up by day and visualized in Figure \ref{fig:0000_byDay_97}  by average preparation time. The most obvious information that can be extracted from the diagram is that the average preparation time varies from day to day by up to 19 minutes.
+As a first try, orders are summed up by day and visualized in Figure \ref{fig:0000_byDay_97}  by average preparation time. The most obvious information that can be extracted from the diagram is that the average preparation time varies by up to 19 minutes.
 
 \begin{figure}[h]
 \begin{center}
@@ -74,29 +76,42 @@ As a first try, orders are summed up by day and visualized in Figure \ref{fig:00
 \end{figure}
 
 
-No clear trend or pattern can be observed in a day by day time axis diagram (Figure \ref{fig:0000_byDay_97}). In order to inspect behaviour of groups of events in a given category as opposed to single events on the time axis, a box and whisker diagram is created from the data (Figure \ref{fig:triple_boxWhisker}). It shows the median and average preparation time as line and point inside the box. The box represents the upper and lower quartile of preparation times into which 50 \% of the data falls while the red whiskers visualize the entire population without outliers. Red circles and a red triangle are shown in case outliers are out of scale of the diagrams visualized range. The purpose of this kind of graph is to give an overview of the set of values of the preparation time and the boundaries most of the orders are located in. The data was analysed by different categories and plotted as box whisker graphs.\newline
+No clear trend or pattern can be observed in a day by day time axis diagram (Figure \ref{fig:0000_byDay_97}). In order to inspect behaviour of groups of events in a given category as opposed to single events on the time axis, box and whisker diagrams are created from the data. It shows the median and average preparation time as line and point inside the box. The box represents the upper and lower quartile of preparation times into which 50 \% of the data falls while the red whiskers visualize the entire population without outliers. Red circles and a red triangle are shown in case outliers are out of scale of the diagrams visualized range. The purpose of this kind of graph is to give an overview of the set of values of the preparation time and the boundaries most of the orders are located in. The data was analysed by different categories and plotted as box whisker graphs.\newline
 \subsubsection{Week Patterns}
-The first diagram in Figure \ref{fig:triple_boxWhisker} on the left is on a week basis. It was created to see if there is a trend over time as the company expertise grows. The only observation that can be made is that after fluctuating preparation times in the first weeks it gets more constant towards the end but there is no clear trend.
+The first diagram is Figure \ref{fig:0000_boxWhisker_week_2129} which is on a week basis. It was created to see if there is a trend over time as the company expertise grows. The only observation that can be made is that after fluctuating preparation times in the first weeks it gets more constant towards the end but there is no clear trend.
+
+\begin{figure}[h]
+\begin{center}
+\includegraphics[width=10cm]{images/0000_boxWhisker_week_2129.png}
+\caption{Box and whisker diagram on week basis}
+\label{fig:0000_boxWhisker_week_2129}
+\end{center}
+\end{figure}
+
 \subsubsection{Slot Patterns}
-Since no conclusion can be drawn from week analysis, a box whisker diagram for each slot is created (Figure \ref{fig:triple_boxWhisker}, middle). The day is divided into three slots, the big meals, lunch and dinner, as well as the time between these, which is not as busy as the meal times. The diagram shows no real difference in preparation times between the slots. A more in depth analysis has to be done, combining slots with other time categories (see below).
+Since no conclusion can be drawn from week analysis, a box whisker diagram for each slot is created (Figure \ref{fig:0000_boxWhisker_slot_2129}). The day is divided into three slots, the big meals, lunch and dinner, as well as the time between these, which is not as busy as the meal times. The diagram shows no real difference in preparation times between the slots. A more in depth analysis has to be done, combining slots with other time categories (see below).
+
+\begin{figure}[h]
+\begin{center}
+\includegraphics[width=10cm]{images/0000_boxWhisker_slot_2129.png}
+\caption{Box and whisker diagram on slot basis}
+\label{fig:0000_boxWhisker_slot_2129}
+\end{center}
+\end{figure}
+
 \subsubsection{Slot and Weekday Patterns}
-Since weekdays can have strong differences in terms of load for the restaurant, a combination of weekday and slot needs to be analysed separately (Figure \ref{fig:triple_boxWhisker}, right).
+Since weekdays can have strong differences in terms of load for the restaurant, a combination of weekday and slot needs to be analysed separately (Figure \ref{fig:0000_boxWhisker_weekdaySlot_2129}).
 Slots and weekdays alone do not have as much information as the two combined. For example on a sunday evening, many people like to go to a restaurant and do not order, while during the week offices sometimes order big deliveries for lunch. The values in the diagram do not vary much, which can be due to the fact the training set has few values for some days.\newline
 The difference between slots on weekdays as well as between weekdays is more significant than all other diagrams before and will be considered when creating the models.
 
-\begin{figure}[htp]
-
-\centering
-\includegraphics[width=.3\textwidth]{images/0000_boxWhisker_week_2129.png}\hfill
-\includegraphics[width=.3\textwidth]{images/0000_boxWhisker_slot_2129.png}\hfill
-\includegraphics[width=.3\textwidth]{images/0000_boxWhisker_weekdaySlot_2129.png}
-
-\caption{Box Whisker diagrams with different time categorization. By Week (left), by Slot (middle) and by Weekday-Slot (right).}
-\label{fig:triple_boxWhisker}
-
+\begin{figure}[h]
+\begin{center}
+\includegraphics[width=10cm]{images/0000_boxWhisker_weekdaySlot_2129.png}
+\caption{Box and whisker diagram on slot and weekday basis}
+\label{fig:0000_boxWhisker_weekdaySlot_2129}
+\end{center}
 \end{figure}
 
-All these steps from the clean up of the data are also applied to the test data set which is used later.
 
 \subsubsection{Restaurant Patterns}\label{subsection:Restaurant Wise Proceeding}
 Preparation times can be very different by restaurant. There are restaurants, which have pre-cooked ingredients and others which prepare every meal fresh. Some have simple ways of preparing meals, like sandwiches, while others take long baking, frying or cooking. For all of them, preparation times are different. A roasted duck takes longer than a sandwich.\newline
@@ -123,7 +138,7 @@ When using day categorization, only the orders before the current one on the sam
 \newline\newline\textbf{Week Categorization}\newline
 The week categorization is done to take larger events into account, e.g. marketing campaigns. In order to consider such events, this categorization uses all predecessing orders of the calendar week for the calculation.
 \newline\newline\textbf{Weekday Categorization}\newline
-Weekdays are also different from each other and have to be considered since they cause different utilization of restaurants, e.g. on sundays markets are closed and people tend to order for lunch but go to the restaurant in the evening. For this categorization all orders before the current on this weekday, regardless of the week, are used for the forecast.
+Weekdays are also different from each other and have to be considered since they cause different utilization of restaurants, e.g. on workdays there are big company lunch orders and on friday there are less. For this categorization all orders before the current on this weekday, regardless of the week, are used for the forecast.
 \newline\newline\textbf{Slot Categorization}\newline
 In the preliminary analysis the slot categorization was found relevant. These slots are lunch, dinner and the time in between and they cause different levels of traffic. Lunch and dinner being high traffic while the time in between is not so crowded. In order to consider these day specific differences, they can be applied together with the other time categorizations, to improve the accuracy of the forecast. For example when using day and slot categorization, not all predecessing orders of the current day are considered for the forecast but only the ones in the same slot and before the current order.
 \newline\newline\textbf{Single Minislot Categorization}\newline
@@ -133,7 +148,7 @@ Even though there might not be enough data for this categorization, it is done t
 \newline\newline\textbf{Edge Case}\newline
 Before the actual forecast can be done, the edge case of not having predecessing orders for the current order, has to be resolved. Since the operations teams suggested a 15 minute basic time for preparation, this time is always taken when no forecast value can be generated for the current order.
 \subsection{Combination of Time Categorizations}\label{subsection:Categorizing by Order}
-Above categorizations can be combined to create a more complex forecasting model. Like all simple models, this complex model is created by using an algorithm and the restaurant category. Only this time a combination of multiple time categories is chosen instead of just one. Each time category is weighted, which is done in 5\% steps, e.g. 5\% category A, 20\% category B and 75\% category C, so all time categories together sum up to 100\%.  This is done for all possible combinations. In order to get a meaningful forecast, the most important time categories are chosen for the model. The time categories are:
+Above categorizations can be combined to create a more complex forecasting model. Like the simple models, this complex model is created by using an algorithm and the restaurant category. Only this time a combination of multiple time categories is chosen instead of just one. Each time category is weighted, which is done in 5\% steps, e.g. 5\% category A, 20\% category B and 75\% for categories C-E, so all time categories together sum up to 100\%.  This is done for all possible combinations. In order to get a meaningful forecast, the most important time categories are chosen for the model. The time categories are:
 \begin{enumerate}
 \item Current slot
 \item Current day
@@ -143,5 +158,5 @@ Above categorizations can be combined to create a more complex forecasting model
 \item Last 4 weeks in general
 \end{enumerate}
 
-The combination of different time categorizations includes into the forecast short term trends, like marketing campaigns, weekly patterns, like busy sunday evenings, and seasonal patterns, like winter increases the order amount.\newline
+The combination of different time categorizations is supposed to reflect short term trends, like marketing campaigns, weekly patterns, like busy sunday evenings, and seasonal patterns, like winter increasing the order amount.\newline
 This combination is done to consider the behavior of orders in the light of all of these categorizations.
