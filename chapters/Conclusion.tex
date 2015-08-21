@@ -2,22 +2,22 @@
 The results of the models are now evaluated and a conclusion is drawn.
 \section{Result Evaluation}
 The aim of this work was to research fitting models for a forecast of preparation times of meals. These models should have significant reduction of waste over the current approach.\newline
-The models are created from different ingredients, the algorithm, time and restaurant category. Each model delivers a forecast, including a RMSE, which indicates the waste to be expected, and a difference of test and training data set, which indicates the relevance. Each result was compared to the basic approach of the Operation Team.\newline
+The models are created from different ingredients, the algorithm, time and restaurant category. Each model delivers a forecast, including a RMSE, which indicates the waste to be expected, and a difference of Test and Training Data Set, which indicates the relevance. Each result was compared to the basic approach of the Operation Team.\newline
 The results are evaluated by category.\newline
 \newline\textbf{Algorithm Comparison}\newline
 When comparing models with same time and restaurant categorization, the Moving Average is the best. For most results it has the lowest RMSE. There are only few outlying results where another algorithm is better and this often only by under 0.2 minutes.\newline
 When using the Weighted Moving Average the result gets better when using a greater weight, which means more orders included for each calculation. This is due to a bigger number of orders being able to compensate smaller outliers in the preparation time.\newline
 When inspecting the behaviour of the Simple Exponential Smoothing, with increasing $\alpha$ the accuracy decreases. The most accurate result in most cases is gained with an $\alpha$ of 0.1. This means the more the forecast relies on previous forecasts, the better it becomes.
-\newline\textbf{Time Categorization}\newline
+\newline\newline\textbf{Time Categorization}\newline
 The results for the time categorization are very close to each other when they have the same restaurant categorization. The finding from this is that the time categorization has only a small impact on the forecast accuracy.
-\newline\textbf{Restaurant Categorization}\newline
-Restaurant categorization is the only categorization which has a huge impact. When using a specific restaurant in the model the accuracy increases by roughly 25\%. This proves the the assumption from \ref{subsection:Restaurant Wise Proceeding} that if the forecast is done for a specific restaurant, the accuracy improves.
-\newline\textbf{Combination of Categorizations}\newline
-When using the combination of categorization in combination with the restaurant agnostic attribute, the best resulting RMSE is around 0.5 minutes above the result of the current approach. This is insignificant and not in line with the requirements to improve the waste by a third..\newline
-When combined with the restaurant specific category, this categorization provides an improvement of about 20\%. This is a little less than the best "basic" forecasting models, e.g. no slots, no time categorization and a Weighted Moving Average with an weight of 650. When compared to the test set, all results improve, which indicate that a bigger data sample increases the accuracy of the forecast.
+\newline\newline\newline\newline\textbf{Restaurant Categorization}\newline
+Restaurant categorization is the only categorization which has a huge impact. When using a specific restaurant in the model the accuracy increases by roughly 30\%. This proves the the assumption from \ref{subsection:Restaurant Wise Proceeding} that if the forecast is done for a specific restaurant, the accuracy improves.
+\newline\newline\textbf{Combination of Time Categories}\newline
+When using the combination of categorization in combination with the restaurant agnostic attribute, the best resulting RMSE is around 0.5 minutes above the result of the current approach. This is insignificant and not in line with the requirements to improve the waste by a third.\newline
+When combined with the restaurant specific category, this categorization provides an improvement of about 20\%. This is a little less than the best "basic" forecasting model, no slots, no time categorization and a Weighted Moving Average with an weight of 650. When compared to the test set, all results improve, which indicate that a bigger data sample increases the accuracy of the forecast.
 
 \newline\newline
-This work provides different forecasting models which decreases the RMSE by up to 25\% compared to the current approach. The RMSE will continue improving with the data set growing over time thus improving the foundation of the forecast.
+This work provides different forecasting models which decreases the RMSE by up to 30\% compared to the current approach. The RMSE shows a trend to improve with the data set growing over time thus improving the foundation of the forecast.
 \section{Future Work}
 The foundation is laid for finding a way to predict the preparation times of restaurants. In the future, the models need continuous monitoring, as the database grows. When RMSE values go consistently below 5.6 minutes, this indicates waste is effectively avoided and the forecast is ready for implementation into daily operation.\newline
-The business needs to monitor the improvements gained through the predictions and determine when they can be used for certain restaurants or parts of the business.
+The business needs to monitor the improvements gained and determine when they can be used for certain restaurants or parts of the business.
