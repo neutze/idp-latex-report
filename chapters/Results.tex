@@ -29,6 +29,7 @@ Except for the outliers, the biggest improvement over the basic approach is arou
 \newline\newline\textbf{Restaurant categorization using yum2take}\newline
 The forecasts results in a RMSE of 6 minutes for the Moving Average model. The Weighted Moving Average is calculated in different weights. The weights start with 25 orders and increase step by step to 675 orders. The RMSE of these forecasts is stable between 6 minutes and 6.5 minutes and the best result is achieved with a weight of 675 orders. The best RMSE for the Simple Exponential Smoothing is the result of an $\alpha$ of 0.1. When increasing $\alpha$ the RMSE also increases to up to 8.5 minutes of RMSE. The accuracy improves for all models when using the test set by 0.07 minutes for the Moving Average, between 0.07 minutes up to 0.45 minutes when using the weighted version and between 0.14 minutes and 0.42 minutes for the Simple Exponential Smoothing.\newline
 When using the restaurant categorization for this time categorization, an improvement up to 30\% for the Moving Average can be observed.
+
 \subsection{With slot categorization}
 The results of the models without time categorization but with slots are shown in Table \ref{tab:No time but slot categorization results}.
 \begin{table}[h]
@@ -45,7 +46,8 @@ MA (25/100) & 6.165134                         & 6.017991                       
 SES (0.1/0.1) & 6.065397                         & 5.982731                       & -0.08266  & 8.379257                         & 8.618189                       & 8.618189  \\ \hline
 \end{tabular}}
 \end{table}
-\newline\newline\textbf{No restaurant categorization}\newline
+
+\newpage\textbf{No restaurant categorization}\newline
 Slot categorizations has an RMSE of 8.2 minutes for the Moving Average case. The Weighted Moving Average is about the same with some results around 8 minutes (e.g. weight of 100 orders, 7.95 minutes). The weights for this algorithm are from 25 orders up to 225 orders in 25 orders steps. This categorization models with the Simple Exponential Smoothing algorithm start from 8.4 minutes and an $\alpha$ of 0.1 and continue to 11.3 minutes when $\alpha$ reaches 1. For all models the accuracy decreases when the test set is used. They decline between 0.25 minutes and 0.54 minutes.\newline
 The best result for this time categorization has the Weighted Moving Average with a weight of 100. An error of 7.95 minutes results in an improvement of around 6\%.
 \newline\newline\textbf{Restaurant categorization using yum2take}\newline
@@ -68,7 +70,7 @@ MA      & 6.011955                         & 5.993232                       & -0
 SES (0.1/0.1) & 6.080652                         & 5.995665                       & -0.08498  & 8.434747                         & 8.57399                        & 0.139242      \\ \hline
 \end{tabular}}
 \end{table}
-\newline\newline\textbf{No restaurant categorization}\newline
+\newpage\textbf{No restaurant categorization}\newline
 The Moving Average model returns a RMSE of 8.4 minutes while the Simple Exponential Smoothing models start with 8.4 minutes for the $\alpha$ of 0.1 and end with 9.8 minutes for the $\alpha$ of 1. The test set is slightly better than the trainings set with 0.17 minutes for the Moving Average model while the $\alpha$ of 0.1 has the worst decline with 0.13 for the Simple Exponential Smoothing and the other values increase accuracy up to the best improvement of almost 1 minute for the $\alpha$ of 1.\newline
 When comparing these results with the basic approach an improvement of only 1\% can be achieved by using this time categorization.
 \newline\newline\textbf{Restaurant categorization using yum2take}\newline
@@ -117,7 +119,7 @@ SES (0.2/0.2) & 6.008943                         & 5.981932                     
 \newline\newline\textbf{No restaurant categorization}\newline
 The result for the Moving Average model has a RMSE of 8.4 minutes. When comparing the Training Data Set to the Test Data Set the accuracy lowers by 0.17 minutes. The Weighted Moving Average model with the weight of 4 orders is an outlier with 9.5 minutes. When using a weight of 8, 12 or 16 orders the RMSE lowers from 8.5 minutes to 8.2 minutes. Also when using the test set, the weight of 4 orders is still higher than the expected value with an RMSE of 8.9 minutes. In contrast to this outlier the other models only get more inaccurate, respectively 0.1 minutes, 0.29 minutes and 0.64 minutes for the three weights. The models with the Simple Exponential Smoothing algorithm have all similiar RMSE, ranging from 8.4 minutes to 8.55 minutes. When compared to the test set the accuracy gets slightly worse but not bigger than 0.21 minutes.\newline
 Compared to the basic approach, an improvement of less than 4\% can be achieved by using the Weighted Moving Average.
-\newline\newline\textbf{Restaurant categorization using yum2take}\newline
+\newpage\textbf{Restaurant categorization using yum2take}\newline
  The Moving Average model has a results with around 6.1 minutes RMSE. The Weighted Moving Average forecast models ranges from 6.1 to 6.6 minutes. The worst results come from the smallest (4 orders, 6.4 minutes) and greatest (16 orders, 6.6 minutes) while the weight of 8 and 12 orders has an RMSE of around 6.1 minutes. When using the Simple Exponential Smoothing, the results range from 6.0 minutes for an $\alpha$ of 0.2 and slowly grows up to 6.29 for an $\alpha$ of 1. The difference between training and Test Data Set is negative for most cases, meaning the result improves for the test set.\newline
  When using Moving Average, an improvement of 28\% over the basic approach can be achieved.
 \subsection{With slot categorization}
