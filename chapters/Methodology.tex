@@ -144,7 +144,6 @@ In the preliminary analysis the slot categorization was found relevant. These sl
 \newline\newline\textbf{Single Minislot Categorization}\newline
 The minislot categorization divides the day into half hour slots. Since this granularity is finer than the slot categorization, it cannot be combined with it. For each forecast for an order all orders before the current one in this slot are used. This is done to consider short time fluctuations caused by peak times, e.g. the half hour in which most people do their lunch or shortly before eight in the evening before the prime time movie starts.\newline
 Even though there might not be enough data for this categorization, it is done to see its potential.
-
 \newline\newline\textbf{Edge Case}\newline
 Before the actual forecast can be done, the edge case of not having predecessing orders for the current order, has to be resolved. Since the operations teams suggested a 15 minute basic time for preparation, this time is always taken when no forecast value can be generated for the current order.
 \subsection{Combination of Time Categorizations}\label{subsection:Categorizing by Order}
